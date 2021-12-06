@@ -1,4 +1,3 @@
-
 import { findAll, findToday, } from '../repositories/todo.repository.js';
 import { WebClient, } from '@slack/web-api';
 import dotenv from 'dotenv';
@@ -28,7 +27,7 @@ export const postTodayTodoData = async () => {
   try {
     const todoData = await findToday();
     const text = todoData.map((x) => `${x.deadline}\t${x.todo}`).join('\n');
-    return postToSlack(`今日締切！！\n${text}`);
+    return postToSlack(`本日締切！！\n${text}`);
   } catch (e) {
     throw Error('Error while getting Today Todo Data');
   }
