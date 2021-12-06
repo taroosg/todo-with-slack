@@ -1,6 +1,7 @@
 import { findAll, findToday, } from '../repositories/todo.repository.js';
 import { WebClient, } from '@slack/web-api';
 import dotenv from 'dotenv';
+import cron from 'node-cron';
 
 dotenv.config();
 
@@ -33,3 +34,7 @@ export const postTodayTodoData = async () => {
   }
 };
 
+// cron.schedule('*/3 * * * * *', () => console.log('3秒ごとに実行'));
+
+cron.schedule('20 31 21 * * *', () => postAllTodoData());
+cron.schedule('30 31 21 * * *', () => postTodayTodoData());
