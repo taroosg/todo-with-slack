@@ -1,8 +1,6 @@
 import express from 'express';
 import { todoRouter } from './routes/todo.route.js';
 import { slackRouter } from './routes/slack.route.js';
-import cron from 'node-cron';
-import axios from 'axios';
 
 const app = express();
 app.use(express.urlencoded({ extended: true }));
@@ -24,7 +22,3 @@ app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);
 });
 
-// cron.schedule('*/3 * * * * *', () => console.log('3秒ごとに実行'));
-
-// cron.schedule('00 17 21 * * *', () => axios.get('http://localhost:3000/slack'));
-// cron.schedule('10 17 21 * * *', () => axios.get('http://localhost:3000/slack/today'));
