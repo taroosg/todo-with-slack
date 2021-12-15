@@ -15,6 +15,16 @@
 
 - [サーバ編 ②（Node.js）](./api-02/readme.md)
 
+  - [データの永続化について](./api-02/about-perpetuation.md)
+  - [Firestore の準備](./api-02/setup-firestore.md)
+  - [ファイル作成と動作確認](./api-02/setup-files.md)
+  - [Create の処理](./api-02/crud-create.md)
+  - [Read の処理（全件）](./api-02/crud-read-all.md)
+  - [Read の処理（1 件）](./api-02/crud-read-one.md)
+  - [Update の処理](./api-02/crud-update.md)
+  - [Delete の処理](./api-02/crud-delete.md)
+  - [まとめ](./api-02/summary.md)
+
 - [フロント編 ①（React）](./app-01/readme.md)
 
   - [React とは](./app-01/about-react.md)
