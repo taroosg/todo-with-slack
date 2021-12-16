@@ -23,6 +23,8 @@
   - [Read の処理（本日以前）](./api-02/crud-read-today.md)
   - [Update の処理](./api-02/crud-update.md)
   - [Delete の処理](./api-02/crud-delete.md)
+  - [Slack 連携設定](./api-02/connect-to-slack.md)
+  - [Slack 連携実装](./api-02/post-to-slack.md)
   - [まとめ](./api-02/summary.md)
 
 - [フロント編 ①（React）](./app-01/readme.md)

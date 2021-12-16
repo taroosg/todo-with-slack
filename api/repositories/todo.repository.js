@@ -12,7 +12,6 @@ export const findAll = async () => {
       .select()
       .order('deadline', { ascending: true })
       .order('todo', { ascending: true });
-    console.log(data);
     return data;
   } catch (e) {
     throw Error('Error while getting Todo Data');
@@ -27,7 +26,6 @@ export const findToday = async () => {
       .lte('deadline', (new Date()).toISOString())
       .order('deadline', { ascending: true })
       .order('todo', { ascending: true });
-    console.log(data);
     return data;
   } catch (e) {
     throw Error('Error while getting Todo Data');
