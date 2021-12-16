@@ -11,17 +11,20 @@
 ルーティングでは，collection 名とデータを受け取り，コントローラにデータを渡す．
 
 ```js
-// routes/tweet.route.js
+// routes/todo.route.js
 
-import express from 'express';
-import { readAllTweetData, createTweetData } from '../controllers/tweet.controller.js';
+import express from "express";
+// 🔽 編集
+import {
+  readAllTodoData,
+  createTodoData,
+} from "../controllers/todo.controller.js";
 
-export const tweetRouter = express.Router();
+export const todoRouter = express.Router();
 
-tweetRouter.get('/', (req, res) => readAllTweetData(req, res));
-// ↓追加
-tweetRouter.post('/', (req, res) => createTweetData(req, res));
-
+todoRouter.get("/", (req, res) => readAllTodoData(req, res));
+// 🔽 追加
+todoRouter.post("/", (req, res) => createTodoData(req, res));
 ```
 
 ## コントローラの作成
@@ -29,123 +32,132 @@ tweetRouter.post('/', (req, res) => createTweetData(req, res));
 コントローラでは，データを整理してサービスに渡す．また，サービスの処理結果を元にレスポンスを返す．
 
 ```js
-// controllers/tweet.controller.js
+// controllers/todo.controller.js
 
-import { getAllTweetData, insertTweetData } from '../services/tweet.service.js'
+// 🔽 編集
+import { getAllTodoData, insertTodoData } from "../services/todo.service.js";
 
-export const readAllTweetData = async (req, res, next) => {
+export const readAllTodoData = async (req, res, next) => {
   // 省略
 };
 
-// ↓追加
-export const createTweetData = async (req, res, next) => {
+// 🔽 追加
+export const createTodoData = async (req, res, next) => {
   try {
-    const { tweet, user_id } = req.body;
-    if (!(tweet && user_id)) {
-      throw new Error('something is blank');
+    const { todo, deadline, user_id } = req.body;
+    if (!(todo && deadline && user_id)) {
+      throw new Error("something is blank");
     }
-    const result = await insertTweetData({
-      data: { tweet: tweet, user_id: Number(user_id) },
+    const result = await insertTodoData({
+      params: { todo: todo, deadline: deadline, user_id: Number(user_id) },
     });
     return res.status(200).json({
       status: 200,
       result: result,
-      message: 'Succesfully post Tweet Data!',
+      message: "Successfully post Todo Data!",
     });
   } catch (e) {
     return res.status(400).json({ status: 400, message: e.message });
   }
 };
-
 ```
 
 ## サービスの作成
 
-サービスではロジックが必要な場合は記述するが，今回はデータをそのまま渡すだけ．実際に Firebase にデータを保存する処理は`repositories`レイヤーに分割する．
+サービスではロジックが必要な場合は記述するが，今回はデータをそのまま渡すだけ．実際に Supabase にデータを保存する処理は `repositories` レイヤーに分割する．
 
 ```js
-// services/tweet.service.js
+// services/todo.service.js
 
-import { findAll, store } from '../repositories/tweet.repository.js';
+// 🔽 編集
+import { findAll, store } from "../repositories/todo.repository.js";
 
-export const getAllTweetData = async () => {
+export const getAllTodoData = async () => {
   // 省略
 };
 
-export const insertTweetData = async ({ data }) => {
+// 🔽 追加
+export const insertTodoData = async ({ params }) => {
   try {
-    const ref = await store({ data: data });
-    return {
-      id: ref.id,
-      data: data,
-    };
+    return await store({ params });
   } catch (e) {
-    throw Error('Error while posting Tweet Data');
+    throw Error("Error while posting Todo Data");
   }
 };
-
 ```
 
 ## リポジトリの作成
 
-collection を指定してデータを保存する処理を実装する．ここで Firestore 関連のコードを記述する必要があるため，関連するコードを import する．
+テーブルを指定してデータを保存する処理を実装する．ここで Supabase 関連のコードを記述する必要があるため，関連するコードを import する．
 
 データ永続化に関するコードをリポジトリのレイヤーに閉じ込めることで，DB の種類が変更された場合にもコントローラやサービスのコードに影響ない状態にすることができる．
 
-Firestore に関するポイントは以下のとおり．
+ポイントは以下のとおり．
 
-- `created_at`と`updated_at`は Firestore の独自形式となるため，ここでユーザが送信してきたデータとマージしている．
+- `dotenv` で環境変数を読み込む．
+- `createClient` で Supabase との連携を確立する．
+- `insert()` でデータを作成する．
+- `created_at`と`updated_at`は Supabase 側で初期値（現在日時）を設定しているため投稿不要．
 
-- collection が存在しない場合は自動的に作成される．処理が実行されると，作成された Document の ID と追加データが返される．
+参考：[https://supabase.com/docs/reference/javascript/insert](https://supabase.com/docs/reference/javascript/insert)
 
 ```js
-// repositories/tweet.repository.js
+// repositories/todo.repository.js
 
-import admin from '../model/firebase.js';
-const db = admin.firestore();
+import dotenv from "dotenv";
+import { createClient } from "@supabase/supabase-js";
+
+dotenv.config();
+
+const supabase = createClient(
+  process.env.SUPABASE_URL,
+  process.env.SUPABASE_API_KEY
+);
 
 export const findAll = () => {
-  return { message: 'OK' };
+  return { message: "OK" };
 };
 
-export const store = async ({ data }) => {
+export const store = async ({ params }) => {
   try {
-    const postData = {
-      ...data,
-      created_at: admin.firestore.Timestamp.now(),
-      updated_at: admin.firestore.Timestamp.now(),
-    };
-    const ref = await db.collection('tweet').add(postData);
-    return ref;
+    const { data, error } = await supabase.from("todo_table").insert([
+      {
+        ...params,
+        is_done: false,
+      },
+    ]);
+    return data;
   } catch (e) {
-    throw Error('Error while store Tweet Data');
+    throw Error("Error while store Todo Data");
   }
 };
-
 ```
 
 ## 動作確認
 
 処理を追加したら動作確認する．サーバを起動して下記コマンドでデータを送信し，成功のレスポンスが返ってくれば OK．
 
-また，ブラウザで Firebase のコンソール画面から Firestore にアクセスし，送信したデータが保存されていることを確認しておく．
+また，ブラウザで Supabase のコンソール画面からテーブルにアクセスし，送信したデータが保存されていることを確認しておく．
 
-動作が確認できたら，2-3 件データを入れておこう．
+動作が確認できたら，2-3 件データを入れておこう．**日付は本日含め適当に設定して複数件入れておく．**
 
 ```bash
-$ curl -X POST -H "Content-Type: application/json" -d '{"tweet":"node.js","user_id":1}' localhost:3001/tweet
+$ curl -X POST -H "Content-Type: application/json" -d '{"todo":"node.js","user_id":1,"deadline":"2021-12-31"}' localhost:3000/todo
 
 {
   "status": 200,
-  "result": {
-    "id": "XMr6sQ26x99QVvSaHewe",
-    "data": {
-      "tweet": "node.js",
-      "user_id": 1
+  "result": [
+    {
+      "id": 1,
+      "user_id": 1,
+      "todo": "node.js",
+      "deadline": "2021-12-31",
+      "is_done": false,
+      "created_at": "2021-12-16T06:21:31.592284+00:00",
+      "updated_at": "2021-12-16T06:21:31.592284+00:00"
     }
-  },
-  "message": "Succesfully post Tweet Data!"
+  ],
+  "message": "Successfully post Todo Data!"
 }
 
 ```
-

@@ -12,7 +12,7 @@ export const findAll = async () => {
       .select()
       .order('deadline', { ascending: true })
       .order('todo', { ascending: true });
-
+    console.log(data);
     return data;
   } catch (e) {
     throw Error('Error while getting Todo Data');
@@ -27,37 +27,37 @@ export const findToday = async () => {
       .lte('deadline', (new Date()).toISOString())
       .order('deadline', { ascending: true })
       .order('todo', { ascending: true });
+    console.log(data);
     return data;
   } catch (e) {
     throw Error('Error while getting Todo Data');
   }
 };
 
-export const store = async ({ data }) => {
+export const store = async ({ params }) => {
   try {
-    const { result, error } = await supabase
+    const { data, error } = await supabase
       .from('todo_table')
       .insert([
         {
-          user_id: data.user_id,
-          todo: data.todo,
-          deadline: data.deadline,
+          ...params,
           is_done: false,
         },
-      ])
-    return result;
+      ]);
+    console.log(data);
+    return data;
   } catch (e) {
     throw Error('Error while store Todo Data');
   }
 };
 
-export const update = async ({ id, data }) => {
+export const update = async ({ id, params }) => {
   try {
-    const { result, error } = await supabase
+    const { data, error } = await supabase
       .from('todo_table')
-      .update({ ...data, updated_at: (new Date()).toISOString() })
+      .update({ ...params, updated_at: (new Date()).toISOString() })
       .match({ id: id });
-    return result;
+    return data;
   } catch (e) {
     throw Error('Error while updating Todo Data');
   }
@@ -65,11 +65,11 @@ export const update = async ({ id, data }) => {
 
 export const destroy = async ({ id }) => {
   try {
-    const { result, error } = await supabase
+    const { data, error } = await supabase
       .from('todo_table')
       .delete()
       .match({ id: id });
-    return result;
+    return data;
   } catch (e) {
     throw Error('Error while deleting Todo Data');
   }

@@ -4,41 +4,40 @@
 
 Read の処理では，ルーティングとコントローラとサービスははじめにつくったものを使用する．
 
-リポジトリに以下の内容を記述する．collection 名を指定してデータをすべて取得する．日付部分は独自形式なので，データ取得後に`Date`形式に変換している．
+リポジトリに以下の内容を記述する．テーブルを指定してデータをすべて取得する．`order()` を使用してデータを並び替えることができる．
 
-`tweetSnapshot`は取得したデータそのままで使いにくいので，必要な部分を取り出して`tweets`に入れている．
-
-また，Firestore の`created_at`と`updated_at`はそのままだと使いづらいので`.toData()`で変換している．
+参考：[https://supabase.com/docs/reference/javascript/using-modifiers](https://supabase.com/docs/reference/javascript/using-modifiers)
 
 ```js
-// repositories/tweet.repository.js
+// repositories/todo.repository.js
 
-import admin from '../model/firebase.js';
-const db = admin.firestore();
+import dotenv from "dotenv";
+import { createClient } from "@supabase/supabase-js";
 
+dotenv.config();
+
+const supabase = createClient(
+  process.env.SUPABASE_URL,
+  process.env.SUPABASE_API_KEY
+);
+
+// 🔽 編集
 export const findAll = async () => {
   try {
-    const tweetSnapshot = await db.collection('tweet').get();
-    const tweets = tweetSnapshot.docs.map((x) => {
-      return {
-        id: x.id,
-        data: {
-          ...x.data(),
-          created_at: x.data().created_at.toDate(),
-          updated_at: x.data().updated_at.toDate(),
-        },
-      };
-    });
-    return tweets;
+    const { data, error } = await supabase
+      .from("todo_table")
+      .select()
+      .order("deadline", { ascending: true })
+      .order("todo", { ascending: true });
+    return data;
   } catch (e) {
-    throw Error('Error while getting Tweet Data');
+    throw Error("Error while getting Todo Data");
   }
 };
 
-export const store = async ({ data }) => {
+export const store = async ({ params }) => {
   // 省略
 };
-
 ```
 
 ## 動作確認（全件取得）
@@ -46,32 +45,31 @@ export const store = async ({ data }) => {
 記述したら動作確認する．下記コマンドを実行して，保存されているデータが全件取得できれば OK（下記はデータ 2 件登録時の例）．
 
 ```bash
-$ curl localhost:3001/tweet
+$ curl localhost:3000/todo
 
 {
   "status": 200,
   "result": [
     {
-      "id": "1JXLilqdOqU7rCrwjEpA",
-      "data": {
-        "tweet": "node.js",
-        "created_at": "2021-07-29T11:38:38.005Z",
-        "user_id": 1,
-        "updated_at": "2021-07-29T11:38:38.006Z"
-      }
+      "id": 2,
+      "user_id": 1,
+      "todo": "react",
+      "deadline": "2021-12-21",
+      "is_done": false,
+      "created_at": "2021-12-16T06:23:58.614838+00:00",
+      "updated_at": "2021-12-16T06:23:58.614838+00:00"
     },
     {
-      "id": "CfTIWGVsuZGOa3nZippY",
-      "data": {
-        "created_at": "2021-07-29T11:39:09.948Z",
-        "updated_at": "2021-07-29T11:39:09.949Z",
-        "user_id": 1,
-        "tweet": "React"
-      }
+      "id": 2,
+      "user_id": 1,
+      "todo": "node.js",
+      "deadline": "2021-12-31",
+      "is_done": false,
+      "created_at": "2021-12-16T06:21:31.592284+00:00",
+      "updated_at": "2021-12-16T06:21:31.592284+00:00"
     }
   ],
-  "message": "Succesfully get All Tweet Data!"
+  "message": "Successfully get All Todo Data!"
 }
 
 ```
-

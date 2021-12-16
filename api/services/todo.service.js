@@ -3,7 +3,7 @@ import { findAll, findToday, store, update, destroy } from '../repositories/todo
 
 export const getAllTodoData = async () => {
   try {
-    return findAll();
+    return await findAll();
   } catch (e) {
     throw Error('Error while getting All Todo Data');
   }
@@ -11,24 +11,24 @@ export const getAllTodoData = async () => {
 
 export const getTodayTodoData = async () => {
   try {
-    return findToday();
+    return await findToday();
   } catch (e) {
     throw Error('Error while getting Today Todo Data');
   }
 };
 
 
-export const insertTodoData = async ({ data }) => {
+export const insertTodoData = async ({ params }) => {
   try {
-    return await store({ data: data });
+    return await store({ params });
   } catch (e) {
     throw Error('Error while posting Todo Data');
   }
 };
 
-export const updateTodoData = async ({ id, data }) => {
+export const updateTodoData = async ({ id, params }) => {
   try {
-    return await update({ id, data });
+    return await update({ id, params });
   } catch (e) {
     throw Error('Error while updating Todo Data');
   }

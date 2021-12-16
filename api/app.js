@@ -5,7 +5,7 @@ import { slackRouter } from './routes/slack.route.js';
 const app = express();
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-const port = 3000;
+const port = 3001;
 
 app.get('/', (req, res) => {
   res.json({

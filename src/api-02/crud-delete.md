@@ -2,145 +2,175 @@
 
 ## データ削除の処理
 
-id を指定して該当するデータを DB から削除する．コレクション名とドキュメント id がわかっていればOK．
+id を指定して該当するデータを DB から削除する．テーブルと id を指定すれば OK．
 
 ## ルーティングの作成
 
 削除のルーティングを追加．更新の場合と同様にパラメータを受け取る．
 
 ```js
-// routes/tweet.route.js
+// routes/todo.route.js
 
-import express from 'express';
-import { readAllTweetData, readOneTweetData, createTweetData, editTweetData, deleteTweetData } from '../controllers/tweet.controller.js';
+import express from "express";
+// 🔽 編集
+import {
+  readAllTodoData,
+  readTodayTodoData,
+  createTodoData,
+  editTodoData,
+  deleteTodoData,
+} from "../controllers/todo.controller.js";
 
-export const tweetRouter = express.Router();
+export const todoRouter = express.Router();
 
-tweetRouter.get('/', (req, res) => readAllTweetData(req, res));
-tweetRouter.get('/:id', (req, res) => readOneTweetData(req, res));
-tweetRouter.post('/', (req, res) => createTweetData(req, res));
-tweetRouter.put('/:id', (req, res) => editTweetData(req, res));
-// ↓追加
-tweetRouter.delete('/:id', (req, res) => deleteTweetData(req, res));
-
+todoRouter.get("/", (req, res) => readAllTodoData(req, res));
+todoRouter.get("/today", (req, res) => readTodayTodoData(req, res));
+todoRouter.post("/", (req, res) => createTodoData(req, res));
+todoRouter.put("/:id", (req, res) => editTodoData(req, res));
+// 🔽 追加
+todoRouter.delete("/:id", (req, res) => deleteTodoData(req, res));
 ```
 
 ## コントローラの作成
 
-コントローラでは document 名（id）を受け取り，サービスの処理を実行する．
+コントローラでは id を受け取り，サービスの処理を実行する．
 
 ```js
-// controllers/tweet.controller.js
+// controllers/todo.controller.js
 
-import { getAllTweetData, getOneTweetData, insertTweetData, updateTweetData, destroyTweetData } from '../services/tweet.service.js';
+// 🔽 編集
+import {
+  getAllTodoData,
+  getTodayTodoData,
+  insertTodoData,
+  updateTodoData,
+  destroyTodoData,
+} from "../services/todo.service.js";
 
-export const readAllTweetData = async (req, res, next) => {
+export const readAllTodoData = async (req, res, next) => {
   // 省略
 };
 
-export const readOneTweetData = async (req, res, next) => {
+export const readTodayTodoData = async (req, res, next) => {
   // 省略
 };
 
-export const createTweetData = async (req, res, next) => {
+export const createTodoData = async (req, res, next) => {
   // 省略
 };
 
-export const editTweetData = async (req, res, next) => {
+export const editTodoData = async (req, res, next) => {
   // 省略
 };
 
-// ↓追加
-export const deleteTweetData = async (req, res, next) => {
+// 🔽 追加
+export const deleteTodoData = async (req, res, next) => {
   try {
     const { id } = req.params;
     if (!id) {
-      throw new Error('something is blank');
+      throw new Error("something is blank");
     }
-    const result = await destroyTweetData({
+    const result = await destroyTodoData({
       id: id,
     });
     return res.status(200).json({
       status: 200,
       result: result,
-      message: 'Succesfully delete Tweet Data!',
+      message: "Successfully delete Todo Data!",
     });
   } catch (e) {
     return res.status(400).json({ status: 400, message: e.message });
   }
 };
-
 ```
 
 ## サービスの作成
 
-サービスではid指定してリポジトリで定義した関数を実行する．
+サービスでは id 指定してリポジトリで定義した関数を実行する．
 
 ```js
-// services/tweet.service.js
+// services/todo.service.js
 
-import { findAll, find, store, update, destroy } from '../repositories/tweet.repository.js';
+// 🔽 編集
+import {
+  findAll,
+  findToday,
+  store,
+  update,
+  destroy,
+} from "../repositories/todo.repository.js";
 
-export const getAllTweetData = async () => {
+export const getAllTodoData = async () => {
   // 省略
 };
 
-export const getOneTweetData = async ({ id }) => {
+export const getTodayTodoData = async () => {
   // 省略
 };
 
-export const insertTweetData = async ({ data }) => {
+export const insertTodoData = async ({ params }) => {
   // 省略
 };
 
-export const updateTweetData = async ({ id, data }) => {
+export const updateTodoData = async ({ id, params }) => {
   // 省略
 };
 
-// ↓追加
-export const destroyTweetData = async ({ id }) => {
+// 🔽 追加
+export const destroyTodoData = async ({ id }) => {
   try {
-    return await destroy({ id: id, });
+    return await destroy({ id: id });
   } catch (e) {
-    throw Error('Error while deleting Tweet Data');
+    throw Error("Error while deleting Todo Data");
   }
 };
-
 ```
 
 ## リポジトリの作成
 
-リポジトリでは DB からデータを削除する．collection 名と document 名があればデータを指定して削除することができる．
+リポジトリでは DB からデータを削除する．id があればデータを指定して削除することができる．
+
+参考：[https://supabase.com/docs/reference/javascript/delete](https://supabase.com/docs/reference/javascript/delete)
 
 ```js
-// repositories/tweet.repository.js
+// repositories/todo.repository.js
 
-import admin from '../model/firebase.js';
-const db = admin.firestore();
+import dotenv from "dotenv";
+import { createClient } from "@supabase/supabase-js";
+
+dotenv.config();
+
+const supabase = createClient(
+  process.env.SUPABASE_URL,
+  process.env.SUPABASE_API_KEY
+);
 
 export const findAll = async () => {
   // 省略
 };
 
-export const find = async ({ id }) => {
+export const findToday = async () => {
   // 省略
 };
 
-export const store = async ({ data }) => {
-  // 省略
-}
-
-export const update = async ({ id, data }) => {
+export const store = async ({ params }) => {
   // 省略
 };
 
-// ↓追加
+export const update = async ({ id, params }) => {
+  // 省略
+};
+
+// 🔽 追加
 export const destroy = async ({ id }) => {
   try {
-    const ref = await db.collection('tweet').doc(id).delete();
-    return { id: id, };
+    const { data, error } = await supabase
+      .from("todo_table")
+      .delete()
+      .match({ id: id });
+    return data;
   } catch (e) {
-    throw Error('Error while deleting Tweet Data');
+    throw Error("Error while deleting Todo Data");
   }
 };
 ```
@@ -152,14 +182,22 @@ export const destroy = async ({ id }) => {
 コンソール画面 or 前項の Read 処理でデータを確認し，データが削除されていれば OK！
 
 ```bash
-$ curl -X DELETE localhost:3001/tweet/TPev9ejBQd7WkxWRuNKk
+$ curl -X DELETE localhost:3000/todo/13
 
 {
   "status": 200,
-  "result": {
-    "id": "TPev9ejBQd7WkxWRuNKk"
-  },
-  "message": "Succesfully delete Tweet Data!"
+  "result": [
+    {
+      "id": 13,
+      "user_id": 1,
+      "todo": "node.js",
+      "deadline": "2021-12-31",
+      "is_done": false,
+      "created_at": "2021-12-16T06:21:31.592284+00:00",
+      "updated_at": "2021-12-16T06:21:31.592284+00:00"
+    }
+  ],
+  "message": "Successfully delete Todo Data!"
 }
 
 ```
