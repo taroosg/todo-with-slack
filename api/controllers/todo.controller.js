@@ -34,7 +34,7 @@ export const createTodoData = async (req, res, next) => {
       throw new Error('something is blank');
     }
     const result = await insertTodoData({
-      data: { todo: todo, deadline: deadline, user_id: Number(user_id) },
+      params: { todo: todo, deadline: deadline, user_id: Number(user_id) },
     });
     return res.status(200).json({
       status: 200,
@@ -55,12 +55,7 @@ export const editTodoData = async (req, res, next) => {
     }
     const result = await updateTodoData({
       id: id,
-      data: {
-        user_id: user_id,
-        todo: todo,
-        deadline: deadline,
-        is_done: is_done,
-      },
+      params: req.body,
     });
     return res.status(200).json({
       status: 200,
