@@ -9,7 +9,7 @@ dotenv.config();
 const postToSlack = async (token, channel, text) => {
   const client = new WebClient(token);
   const response = await client.chat.postMessage({ channel, text });
-  console.log(response.ok);
+  console.log(response);
   return response;
 }
 
@@ -18,9 +18,9 @@ export const postAllTodoData = async () => {
     const token = process.env.SLACK_API_TOKEN;
     const todoData = await findAll();
     const text = todoData.map((x) => `${x.deadline}\t${x.todo}`).join('\n');
-    return postToSlack(token, '#test', `現在のTodo！\n${text}`);
+    return await postToSlack(token, '#test', `現在のTodo！\n${text}`);
   } catch (e) {
-    throw Error('Error while getting All Todo Data');
+    throw Error(e);
   }
 };
 
@@ -29,7 +29,7 @@ export const postTodayTodoData = async () => {
     const token = process.env.SLACK_API_TOKEN;
     const todoData = await findToday();
     const text = todoData.map((x) => `${x.deadline}\t${x.todo}`).join('\n');
-    return postToSlack(token, '#test', `本日締切！！\n${text}`);
+    return await postToSlack(token, '#test', `本日締切！！\n${text}`);
   } catch (e) {
     throw Error('Error while getting Today Todo Data');
   }
@@ -37,5 +37,5 @@ export const postTodayTodoData = async () => {
 
 // cron.schedule('*/3 * * * * *', () => console.log('3秒ごとに実行'));
 
-// cron.schedule('30 19 13 * * *', () => postAllTodoData());
-// cron.schedule('40 19 13 * * *', () => postTodayTodoData());
+// cron.schedule('00 05 17 * * *', () => postAllTodoData());
+// cron.schedule('10 05 17 * * *', () => postTodayTodoData());

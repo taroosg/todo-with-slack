@@ -152,7 +152,7 @@ $ curl localhost:3000/todo
   "result": {
     "message": "OK"
   },
-  "message": "Succesfully get All Todo Data!"
+  "message": "Successfully get All Todo Data!"
 }
 
 ```
