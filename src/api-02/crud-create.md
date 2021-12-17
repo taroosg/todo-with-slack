@@ -161,3 +161,7 @@ $ curl -X POST -H "Content-Type: application/json" -d '{"todo":"node.js","user_i
 }
 
 ```
+
+Supabase の管理画面を確認するとデータが保存されている．
+
+![Supabase データ保存確認](./img/supabase-04.png)
