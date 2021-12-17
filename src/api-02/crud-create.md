@@ -137,10 +137,6 @@ export const store = async ({ params }) => {
 
 処理を追加したら動作確認する．サーバを起動して下記コマンドでデータを送信し，成功のレスポンスが返ってくれば OK．
 
-また，ブラウザで Supabase のコンソール画面からテーブルにアクセスし，送信したデータが保存されていることを確認しておく．
-
-動作が確認できたら，2-3 件データを入れておこう．**日付は本日含め適当に設定して複数件入れておく．**
-
 ```bash
 $ curl -X POST -H "Content-Type: application/json" -d '{"todo":"node.js","user_id":1,"deadline":"2021-12-31"}' localhost:3000/todo
 
@@ -162,6 +158,8 @@ $ curl -X POST -H "Content-Type: application/json" -d '{"todo":"node.js","user_i
 
 ```
 
-Supabase の管理画面を確認するとデータが保存されている．
+また，ブラウザで Supabase のコンソール画面からテーブルにアクセスし，送信したデータが保存されていることを確認しておく．
+
+動作が確認できたら，2-3 件データを入れておこう．**日付は本日含め適当に設定して複数件入れておく．**
 
 ![Supabase データ保存確認](./img/supabase-04.png)
