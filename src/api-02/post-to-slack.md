@@ -21,6 +21,8 @@ $ npm i @slack/web-api
 `app.js` を以下のように編集する．
 
 ```js
+// app.js
+
 import express from "express";
 import { omikujiRouter } from "./routes/omikuji.route.js";
 import { jankenRouter } from "./routes/janken.route.js";
@@ -59,6 +61,8 @@ app.listen(port, () => {
 - `slack/today` で本日以前締切のデータのみを Slack 投稿．
 
 ```js
+// routes/slack.route.js
+
 import express from "express";
 import {
   sendAllTodoData,
@@ -76,6 +80,8 @@ slackRouter.get("/today", (req, res) => sendTodayTodoData(req, res));
 サービスの処理を呼び出しつつ，レスポンスを設定．
 
 ```js
+// controllers/slack.controller.js
+
 import {
   postAllTodoData,
   postTodayTodoData,
@@ -123,6 +129,8 @@ Slack 連携のライブラリを読み込み，投稿の処理を実装する�
 - （投稿のテキストはいい感じに作りましょう w）
 
 ```js
+// services/slack.service.js
+
 import { findAll, findToday } from "../repositories/todo.repository.js";
 import { WebClient } from "@slack/web-api";
 import dotenv from "dotenv";
@@ -292,6 +300,8 @@ $ npm i node-cron
 サービスの処理でライブラリを読み込み，定期実行の処理を追記する．
 
 ```js
+// services/slack.service.js
+
 import { findAll, findToday } from "../repositories/todo.repository.js";
 import { WebClient } from "@slack/web-api";
 import dotenv from "dotenv";
