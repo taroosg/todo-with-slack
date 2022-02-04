@@ -27,6 +27,8 @@ export const insertTodoData = async ({ params }) => {
 };
 
 export const updateTodoData = async ({ id, params }) => {
+  console.log(id);
+  console.log(params);
   try {
     return await update({ id, params });
   } catch (e) {

@@ -69,7 +69,15 @@ export const editTodoData = async (req, res, next) => {
   try {
     const { id } = req.params;
     const { user_id, todo, deadline, is_done } = req.body;
-    if (!(id && user_id && todo && deadline && is_done)) {
+    if (
+      !(
+        id &&
+        user_id &&
+        todo &&
+        deadline &&
+        ![null, undefined].includes(is_done)
+      )
+    ) {
       throw new Error("something is blank");
     }
     const result = await updateTodoData({
