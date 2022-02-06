@@ -32,6 +32,7 @@ const App = () => {
         <li>
           <Link to="/todo/post">todo 入力</Link>
         </li>
+        {/* 🔽 追加 */}
         <li>
           <Link to="/test-slack">test slack</Link>
         </li>

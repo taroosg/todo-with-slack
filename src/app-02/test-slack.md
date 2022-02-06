@@ -1,13 +1,18 @@
 # Slack 連携機能のテスト画面実装
 
-テスト画面つくる
+サーバサイドで実装した Slack 投稿の処理を動かすためのテスト画面を作成する．
 
-`TestSlack.jsx` 作成．
+`src/components` 内に `TestSlack.jsx` を作成する．
 
-ルーティング追加・
+ファイルを作成したらルーティングを追加する．`App.jsx` を以下のように編集する．
 
 ```js
 // src/App.jsx
+
+// 省略
+
+// 🔽 追加
+import { TestSlack } from "./pages/TestSlack";
 
 // 省略
 
@@ -23,6 +28,7 @@
     <li>
       <Link to="/todo/post">todo 入力</Link>
     </li>
+    {/* 🔽 追加 */}
     <li>
       <Link to="/test-slack">test slack</Link>
     </li>
@@ -32,11 +38,20 @@
     <Route path="/todo/index" element={<TodoIndex />} />
     <Route path="/todo/today" element={<TodoToday />} />
     <Route path="/todo/post" element={<TodoPost />} />
+    {/* 🔽 追加 */}
     <Route path="/test-slack" element={<TestSlack />} />
     <Route path="/*" element={<NotFound />} />
   </Routes>
-</BrowserRouter>
+</BrowserRouter>;
 ```
+
+続いて，`TestSlack.jsx` を以下のように編集する．内容は以下のとおり．
+
+- `postAllTodo` 関数はデータ全件を Slack に投稿する URL にリクエストを送信する．
+
+- `postTodayTodo` 関数は実行日以前のデータを Slack に投稿する URL にリクエストを送信する．
+
+- `onClick` でクリック時に上記関数を実行するように設定する．
 
 ```js
 // src/pages/TestSlack.jsx
@@ -68,3 +83,7 @@ export const TestSlack = () => {
   );
 };
 ```
+
+## 動作確認
+
+各ボタンをクリックし，Slack に該当するデータが投稿されれば OK！！

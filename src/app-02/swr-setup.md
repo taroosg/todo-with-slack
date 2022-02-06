@@ -38,7 +38,7 @@
 
 今回のアプリケーションでは，すでに CSR にて実装を行っている．
 
-tweet 一覧表示において，より柔軟なタイミングで最新のデータが取得できるよう SWR を用いた実装を追加で行う．
+todo 一覧表示において，より柔軟なタイミングで最新のデータが取得できるよう SWR を用いた実装を追加で行う．
 
 ## SWR 処理の実装
 
@@ -50,42 +50,47 @@ SWR の機能はライブラリとして提供されている．
 $ npm i swr
 ```
 
-`TweetIndex.jsx`を以下のように編集する．
+`TodoIndex.jsx`を以下のように編集する．
 
 データを取得するための`fetcher`関数を定義し，`useSWR`で「リクエスト先」と「データ取得関数」を指定する．
 
 > 解説
 >
-> - 取得したデータと失敗した場合のエラーはそれぞれ`data`と`error`に格納される．
-> - データが取得できなかった場合やエラーが発生しない場合はそれぞれ`undefined`となるため，容易に条件分岐することができる．
+> - 取得したデータと失敗した場合のエラーはそれぞれ `data` と `error` に格納される．
+>
+> - データが取得できなかった場合やエラーが発生しない場合はそれぞれ `undefined` となるため，容易に条件分岐することができる．
 
 ```js
-// src/pages/TweetIndex.jsx
+// src/pages/TodoIndex.jsx
 
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
-import { Tweet } from "../components/Tweet";
+import { Todo } from "../components/Todo";
 import useSWR from "swr";
 
-export const TweetIndex = () => {
+export const TodoIndex = () => {
   // 省略
 
-  // ↓ 追加
+  // 🔽 追加
   const fetcher = async (url) => (await axios.get(url)).data.result;
 
-  // ↓ 追加
-  const { data, error } = useSWR("http://localhost:3001/tweet", fetcher);
+  // 🔽 追加
+  const { data, error } = useSWR("http://localhost:3001/todo", fetcher);
 
-  // ↓ 追加
+  // 🔽 追加
   return (
     <ul>
       {data?.map((x, i) => (
-        <Tweet
-          key={i}
+        <Todo
+          key={x.id}
           id={x.id}
-          tweet={x.data.tweet}
-          user_id={x.data.user_id}
-          created_at={x.data.created_at}
+          todo={x.todo}
+          deadline={x.deadline}
+          is_done={x.is_done}
+          user_id={x.user_id}
+          created_at={x.created_at}
+          updated_at={x.updated_at}
+          getData={getAllTodo}
         />
       ))}
     </ul>
