@@ -1,6 +1,16 @@
 # todo 削除処理の作成
 
-削除の処理を追加する．
+削除の処理を追加する．手順は以下のとおり．
+
+- axios を用いて，Node.js 側で実装した削除の URL にリクエストを送信する．
+
+- 削除には「id」があれば良い．
+
+- 更新と同様，削除処理完了後に最新データ取得の処理を実行する．
+
+## 削除処理の追加
+
+`Todo.jsx` を以下のように編集する．
 
 ```js
 // src/components/Todo.jsx
@@ -8,7 +18,6 @@
 import axios from "axios";
 
 export const Todo = ({
-  hoge,
   id,
   todo,
   deadline,
@@ -19,11 +28,7 @@ export const Todo = ({
   getData,
 }) => {
   const updateTodoData = async (params) => {
-    const {
-      id: {},
-      ...data
-    } = params;
-    const newData = { ...data, ...{ is_done: is_done ? false : true } };
+    const newData = { ...params, ...{ is_done: is_done ? false : true } };
     const requestUrl = "http://localhost:3001/todo";
     const updatedData = await axios.put(`${requestUrl}/${params.id}`, newData);
     const result = await getData();

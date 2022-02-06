@@ -29,13 +29,13 @@ export const Todo = () => {
 ```js
 import { useState, useEffect } from "react";
 import axios from "axios";
-// ↓ 追加
+// 🔽 追加
 import { Todo } from "../components/Todo";
 
 export const TodoIndex = () => {
   // 省略
 
-  // ↓ 編集
+  // 🔽 編集
   return (
     <ul>
       {todoList?.map((x) => (

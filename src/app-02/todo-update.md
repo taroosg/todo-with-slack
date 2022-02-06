@@ -1,8 +1,22 @@
 # todo 更新処理の作成
 
+更新の処理を追加する．今回はチェックボックスで完了未完了の変更をできるようにする．
+
+流れは以下のとおり．
+
+- `onChange` を用いて，チェックボックスの切り替えを検出する．
+
+- 切り替えのタイミングで更新処理の関数を実行する．`is_done` の「true」「false」を入れ替えてサーバに送信する．
+
+- 更新処理終了後は，更新後の最新データを反映させるため，`TodoIndex.jsx` から入力されたデータ取得関数を実行している．
+
+> 補足
+>
+> サーバへ送信するデータについてはサーバ側で定めている．実装の際に確認しておくこと．
+
 ## 更新処理の追加
 
-更新の処理を追加する．
+`Todo.jsx` を以下のように編集する．
 
 ```js
 // src/components/Todo.jsx
@@ -10,7 +24,6 @@
 import axios from "axios";
 
 export const Todo = ({
-  hoge,
   id,
   todo,
   deadline,
@@ -21,11 +34,7 @@ export const Todo = ({
   getData,
 }) => {
   const updateTodoData = async (params) => {
-    const {
-      id: {},
-      ...data
-    } = params;
-    const newData = { ...data, ...{ is_done: is_done ? false : true } };
+    const newData = { ...params, ...{ is_done: is_done ? false : true } };
     const requestUrl = "http://localhost:3001/todo";
     const updatedData = await axios.put(`${requestUrl}/${params.id}`, newData);
     const result = await getData();
@@ -66,7 +75,6 @@ export const TodoIndex = () => {
     <ul>
       {todoList?.map((x, i) => (
         <Todo
-          hoge={i}
           id={x.id}
           todo={x.todo}
           deadline={x.deadline}

@@ -46,13 +46,13 @@ $ npm i cors
 
 ```js
 import express from "express";
-// ↓ 追加
+// 🔽 追加
 import cors from "cors";
 
 // 省略
 
 const app = express();
-// ↓ 1 行追加
+// 🔽 1 行追加
 app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());

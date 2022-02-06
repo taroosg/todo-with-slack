@@ -50,9 +50,9 @@ SWR の機能はライブラリとして提供されている．
 $ npm i swr
 ```
 
-`TodoIndex.jsx`を以下のように編集する．
+`TodoIndex.jsx` を以下のように編集する．
 
-データを取得するための`fetcher`関数を定義し，`useSWR`で「リクエスト先」と「データ取得関数」を指定する．
+データを取得するための `fetcher` 関数を定義し，`useSWR` で「リクエスト先」と「データ取得関数」を指定する．
 
 > 解説
 >
@@ -63,9 +63,9 @@ $ npm i swr
 ```js
 // src/pages/TodoIndex.jsx
 
-import { useState, useEffect } from "react";
-import axios from "axios";
-import { Todo } from "../components/Todo";
+// 省略
+
+// 🔽 追加
 import useSWR from "swr";
 
 export const TodoIndex = () => {
