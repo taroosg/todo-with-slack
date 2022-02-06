@@ -6,7 +6,7 @@
 
 > **Key Point**💡
 >
-> `PUT`形式は`GET`と`POST`が合わさったような形式で，`req.params.id` で id を送信し，同時に`req.body`で上書きするデータを送信する．
+> `PUT` 形式は `GET` と `POST` が合わさったような形式で，`req.params.id` で id を送信し，同時に `req.body` で上書きするデータを送信する．
 >
 > 今回は使用しないが，`GET` でも同様に `req.params.id` で id を送信して受け取ることができる．
 
@@ -14,7 +14,7 @@
 
 update のルーティングを追加．
 
-id 指定する．`/hoge`に`PUT`でリクエストを送信した場合，`req.params.id`は`hoge`になる．
+id 指定する．`/hoge` に `PUT` でリクエストを送信した場合，`req.params.id` は`hoge`になる．
 
 ```js
 // routes/todo.route.js
