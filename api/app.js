@@ -1,8 +1,10 @@
 import express from 'express';
 import { todoRouter } from './routes/todo.route.js';
 import { slackRouter } from './routes/slack.route.js';
+import cors from "cors";
 
 const app = express();
+app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 const port = 3001;

@@ -121,7 +121,7 @@ import { findAll } from "../repositories/todo.repository.js";
 
 export const getAllTodoData = async () => {
   try {
-    return findAll();
+    return await findAll();
   } catch (e) {
     throw Error("Error while getting All Todo Data");
   }
