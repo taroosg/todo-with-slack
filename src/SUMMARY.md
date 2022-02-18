@@ -37,6 +37,7 @@
   - [子コンポーネントへの関数入力](./app-01/props-function.md)
   - [http リクエストの実装](./app-01/http-request.md)
   - [表示の調整](./app-01/ui.md)
+  - [まとめ](./app-01/summary.md)
   - [課題](./app-01/work.md)
 
 - [フロント編 ②（React）](./app-02/readme.md)
