@@ -12,6 +12,7 @@
   - [API 実装 2（おみくじ中級編）](./api-01/omikuji-api02.md)
   - [API 実装 3（じゃんけん）](./api-01/janken-api.md)
   - [まとめ](./api-01/summary.md)
+  - [課題](./api-01/work.md)
 
 - [サーバ編 ②（Node.js）](./api-02/readme.md)
 
