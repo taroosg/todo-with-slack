@@ -12,8 +12,9 @@
   - [API 実装 2（おみくじ中級編）](./api-01/omikuji-api02.md)
   - [API 実装 3（じゃんけん）](./api-01/janken-api.md)
   - [まとめ](./api-01/summary.md)
+  - [課題](./api-01/work.md)
 
-- [サーバ編 ②（Node.js）](./api-02/readme.md)
+<!-- - [サーバ編 ②（Node.js）](./api-02/readme.md)
 
   - [データの永続化について](./api-02/about-perpetuation.md)
   - [Supabase の準備](./api-02/setup-supabase.md)
@@ -25,9 +26,9 @@
   - [Delete の処理](./api-02/crud-delete.md)
   - [Slack 連携設定](./api-02/connect-to-slack.md)
   - [Slack 連携実装](./api-02/post-to-slack.md)
-  - [まとめ](./api-02/summary.md)
+  - [まとめ](./api-02/summary.md) -->
 
-- [フロント編 ①（React）](./app-01/readme.md)
+<!-- - [フロント編 ①（React）](./app-01/readme.md)
 
   - [React とは](./app-01/about-react.md)
   - [アプリケーション実装の準備](./app-01/construct-app.md)
@@ -38,9 +39,9 @@
   - [http リクエストの実装](./app-01/http-request.md)
   - [表示の調整](./app-01/ui.md)
   - [まとめ](./app-01/summary.md)
-  - [課題](./app-01/work.md)
+  - [課題](./app-01/work.md) -->
 
-- [フロント編 ②（React）](./app-02/readme.md)
+<!-- - [フロント編 ②（React）](./app-02/readme.md)
   - [サーバ側の準備](./app-02/setup-server.md)
   - [必要な画面の準備](./app-02/create-pages.md)
   - [todo 送信画面の作成](./app-02/todo-post.md)
@@ -52,4 +53,4 @@
   - [データ取得タイミングの最適化](./app-02/swr-setup.md)
   - [データ取得タイミングの調整](./app-02/swr-polling.md)
   - [Slack 連携機能のテスト画面実装](./app-02/test-slack.md)
-  - [まとめ](./app-02/summary.md)
+  - [まとめ](./app-02/summary.md) -->
