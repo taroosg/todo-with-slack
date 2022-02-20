@@ -21,7 +21,7 @@ jobs:
       - run: mdbook build
 
       - run: |
-          cp src/server.ts book
+          cp server.ts ./book
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
