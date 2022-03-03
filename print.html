@@ -97,7 +97,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="index.html"><strong aria-hidden="true">1.</strong> はじめに</a></li><li class="chapter-item expanded "><a href="api-01/index.html"><strong aria-hidden="true">2.</strong> サーバ編 ①（Node.js）</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="api-01/about-nodejs.html"><strong aria-hidden="true">2.1.</strong> Node.js とは</a></li><li class="chapter-item expanded "><a href="api-01/prepare-api.html"><strong aria-hidden="true">2.2.</strong> API 実装の準備</a></li><li class="chapter-item expanded "><a href="api-01/install-express.html"><strong aria-hidden="true">2.3.</strong> Express のインストール</a></li><li class="chapter-item expanded "><a href="api-01/omikuji-api01.html"><strong aria-hidden="true">2.4.</strong> API 実装 1（おみくじ初級編）</a></li><li class="chapter-item expanded "><a href="api-01/add-command.html"><strong aria-hidden="true">2.5.</strong> コマンドの追加</a></li><li class="chapter-item expanded "><a href="api-01/omikuji-api02.html"><strong aria-hidden="true">2.6.</strong> API 実装 2（おみくじ中級編）</a></li><li class="chapter-item expanded "><a href="api-01/janken-api.html"><strong aria-hidden="true">2.7.</strong> API 実装 3（じゃんけん）</a></li><li class="chapter-item expanded "><a href="api-01/summary.html"><strong aria-hidden="true">2.8.</strong> まとめ</a></li><li class="chapter-item expanded "><a href="api-01/work.html"><strong aria-hidden="true">2.9.</strong> 課題</a></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="index.html"><strong aria-hidden="true">1.</strong> はじめに</a></li><li class="chapter-item expanded "><a href="api-00/index.html"><strong aria-hidden="true">2.</strong> サーバ編 ①（Node.js）</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="api-00/get-started.html"><strong aria-hidden="true">2.1.</strong> Cloud Functions と Express</a></li><li class="chapter-item expanded "><a href="api-00/setup.html"><strong aria-hidden="true">2.2.</strong> 環境構築</a></li><li class="chapter-item expanded "><a href="api-00/serve-deploy.html"><strong aria-hidden="true">2.3.</strong> 動作確認とデプロイ</a></li><li class="chapter-item expanded "><a href="api-00/install-express.html"><strong aria-hidden="true">2.4.</strong> Express の導入</a></li><li class="chapter-item expanded "><a href="api-00/get-params.html"><strong aria-hidden="true">2.5.</strong> Express での値の受け取り</a></li><li class="chapter-item expanded "><a href="api-00/request.html"><strong aria-hidden="true">2.6.</strong> http リクエストの実装</a></li><li class="chapter-item expanded "><a href="api-00/cors.html"><strong aria-hidden="true">2.7.</strong> CORS 対策</a></li><li class="chapter-item expanded "><a href="api-00/work.html"><strong aria-hidden="true">2.8.</strong> 課題</a></li></ol></li><li class="chapter-item expanded "><a href="api-01/index.html"><strong aria-hidden="true">3.</strong> サーバ編補足（Node.js）</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="api-01/about-nodejs.html"><strong aria-hidden="true">3.1.</strong> Node.js とは</a></li><li class="chapter-item expanded "><a href="api-01/prepare-api.html"><strong aria-hidden="true">3.2.</strong> API 実装の準備</a></li><li class="chapter-item expanded "><a href="api-01/install-express.html"><strong aria-hidden="true">3.3.</strong> Express のインストール</a></li><li class="chapter-item expanded "><a href="api-01/omikuji-api01.html"><strong aria-hidden="true">3.4.</strong> API 実装 1（おみくじ初級編）</a></li><li class="chapter-item expanded "><a href="api-01/add-command.html"><strong aria-hidden="true">3.5.</strong> コマンドの追加</a></li><li class="chapter-item expanded "><a href="api-01/omikuji-api02.html"><strong aria-hidden="true">3.6.</strong> API 実装 2（おみくじ中級編）</a></li><li class="chapter-item expanded "><a href="api-01/janken-api.html"><strong aria-hidden="true">3.7.</strong> API 実装 3（じゃんけん）</a></li><li class="chapter-item expanded "><a href="api-01/summary.html"><strong aria-hidden="true">3.8.</strong> まとめ</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -229,7 +229,7 @@
 <li>
 <p>第 1 回目</p>
 <ul>
-<li>Node.js の基本的な動かし方，実装方法を学ぶ．</li>
+<li>Node.js の基本的な動かし方，実装方法を学ぶ．サーバレスでの実装に挑戦．</li>
 </ul>
 </li>
 <li>
@@ -267,6 +267,832 @@ v16.13.0
 
 </code></pre>
 <div id="chapter_begin" style="break-before: page; page-break-before: always;"></div><h1 id="サーバ編-①nodejs"><a class="header" href="#サーバ編-①nodejs">サーバ編 ①（Node.js）</a></h1>
+<h2 id="今日のゴール"><a class="header" href="#今日のゴール">今日のゴール</a></h2>
+<ul>
+<li>
+<p>Cloud Functions で Express を用いた Node.js を実装し，動作を確認する．</p>
+</li>
+<li>
+<p>Cloud Functions を使った開発の手順を把握する．</p>
+</li>
+<li>
+<p>Node.js の開発手順の感覚を掴む．</p>
+</li>
+</ul>
+<h2 id="今回実装するアプリケーション"><a class="header" href="#今回実装するアプリケーション">今回実装するアプリケーション</a></h2>
+<ul>
+<li>
+<p>Cloud Functions 上で Google books API から情報を取得する．</p>
+</li>
+<li>
+<p>クライアントから送信されてきたキーワードを受け取り，API に投げる．</p>
+</li>
+<li>
+<p>API から返ってきたデータをクライアントに送信する．</p>
+</li>
+<li>
+<p>Cloud Functions を利用することでサーバを用意することなく API を実装！</p>
+</li>
+</ul>
+<div id="chapter_begin" style="break-before: page; page-break-before: always;"></div><h1 id="cloud-functions-と-express"><a class="header" href="#cloud-functions-と-express">Cloud Functions と Express</a></h1>
+<h2 id="cloud-functions-の特徴と利点"><a class="header" href="#cloud-functions-の特徴と利点">Cloud Functions の特徴と利点</a></h2>
+<h3 id="概要--特徴"><a class="header" href="#概要--特徴">概要 / 特徴</a></h3>
+<ul>
+<li>
+<p>イベントドリブンのサーバーレスコンピューティングプラットフォーム．</p>
+</li>
+<li>
+<p>Firebase 上で Node.js で記述した関数を実行することができる．</p>
+</li>
+</ul>
+<h3 id="利点"><a class="header" href="#利点">利点</a></h3>
+<ul>
+<li>
+<p>サーバーのプロビジョニング，管理，アップグレードが不要．</p>
+</li>
+<li>
+<p>負荷に応じた自動スケーリング．</p>
+</li>
+<li>
+<p>異なる言語にまたがる，複雑なアプリケーション開発を簡素化．</p>
+</li>
+</ul>
+<p><a href="https://firebase.google.com/docs/functions?hl=ja">参考（ドキュメント）</a></p>
+<h2 id="express-の特徴と利点"><a class="header" href="#express-の特徴と利点">Express の特徴と利点</a></h2>
+<h3 id="概要--特徴-1"><a class="header" href="#概要--特徴-1">概要 / 特徴</a></h3>
+<ul>
+<li>
+<p>最小限で柔軟な Node.js Web アプリケーション・フレームワーク．</p>
+</li>
+<li>
+<p>無数の HTTP ユーティリティー・メソッドとミドルウェアを自由に使用できるため，堅固な API を迅速かつ容易に作成できる．</p>
+</li>
+<li>
+<p>ほぼデファクトスタンダード．</p>
+</li>
+</ul>
+<h3 id="利点-1"><a class="header" href="#利点-1">利点</a></h3>
+<ul>
+<li>
+<p>Routing の設定が非常にわかりやすい．</p>
+</li>
+<li>
+<p>環境構築が楽．</p>
+</li>
+<li>
+<p>情報がとにかく多い．</p>
+</li>
+</ul>
+<p><a href="https://expressjs.com/ja/">参考（ドキュメント）</a></p>
+<div id="chapter_begin" style="break-before: page; page-break-before: always;"></div><h1 id="環境構築"><a class="header" href="#環境構築">環境構築</a></h1>
+<h2 id="必要なツールのバージョン確認"><a class="header" href="#必要なツールのバージョン確認">必要なツールのバージョン確認</a></h2>
+<ul>
+<li>
+<p>Node.js と npm が必要なので，以下のコマンドで状況を確認する．</p>
+</li>
+<li>
+<p>バージョンが表示されれば OK．</p>
+</li>
+</ul>
+<pre><code class="language-bash">$ node -v
+v16.13.0
+$ npm -v
+8.1.0
+</code></pre>
+<h2 id="firebase-のプロジェクト作成"><a class="header" href="#firebase-のプロジェクト作成">Firebase のプロジェクト作成</a></h2>
+<ul>
+<li>
+<p>Firebase のコンソールにログインし，新規プロジェクトを作成する．</p>
+</li>
+<li>
+<p>プロジェクト名は任意（今回は<code>20200601-functions</code>）．</p>
+</li>
+<li>
+<p>DB などは特に設定しなくて OK（下記画面が表示された段階で OK）．</p>
+</li>
+</ul>
+<p><img src="api-00/./images/project_view01.png" alt="firebaseプロジェクト画面" /></p>
+<h2 id="fiirebase-を扱うツールのインストール"><a class="header" href="#fiirebase-を扱うツールのインストール">Fiirebase を扱うツールのインストール</a></h2>
+<ul>
+<li>
+<p>firebase 関連のコマンドを実行するため，下記のコマンドでインストールする．</p>
+</li>
+<li>
+<p><code>-g</code>をつけてグローバルにインストールする．</p>
+</li>
+<li>
+<p>すでにインストールしている場合も，下記コマンドで最新版にアップデートできるため必ず行う．</p>
+</li>
+</ul>
+<pre><code class="language-bash">$ npm install -g firebase-tools
+</code></pre>
+<p>実行結果</p>
+<pre><code class="language-bash">+ firebase-tools@8.9.0
+added 592 packages from 360 contributors in 17.497s
+</code></pre>
+<p>【注意】バージョンが<code>8.4.0</code>の場合は後々エラーが発生して先へ進めなくなるので必ず<code>8.4.1</code>以上にしておくこと．</p>
+<h2 id="雛形の作成"><a class="header" href="#雛形の作成">雛形の作成</a></h2>
+<ul>
+<li>
+<p>適当な場所にディレクトリを作成し，ターミナルで移動して必要なファイルを準備する．</p>
+</li>
+<li>
+<p>今回は例としてデスクトップに<code>20200601cloudfunctions</code>ディレクトリを作成する．</p>
+</li>
+<li>
+<p>下記コマンドを順番に実行．</p>
+</li>
+</ul>
+<pre><code class="language-bash">$ cd ~/Desktop
+$ mkdir 20200601cloudfunctions
+$ cd 20200601cloudfunctions
+$ firebase init
+</code></pre>
+<ul>
+<li>下記エラーが表示された場合はログインする．</li>
+</ul>
+<pre><code class="language-bash">Error: Failed to authenticate, have you run firebase login?
+</code></pre>
+<ul>
+<li>下記コマンドでログイン．</li>
+</ul>
+<pre><code class="language-bash">$ firebase login
+</code></pre>
+<ul>
+<li>
+<p><code>firebase init</code>がうまくいくと選択肢が出るので，十字キーで<code>Functions</code>を選択してスペースキーでチェックを入れる（下図参照）．</p>
+</li>
+<li>
+<p>チェックを入れたら Enter．</p>
+</li>
+</ul>
+<pre><code class="language-bash">? Which Firebase CLI features do you want to set up for this folder? Press Space
+ to select features, then Enter to confirm your choices.
+ ◯ Database: Deploy Firebase Realtime Database Rules
+ ◯ Firestore: Deploy rules and create indexes for Firestore
+❯◉ Functions: Configure and deploy Cloud Functions
+ ◯ Hosting: Configure and deploy Firebase Hosting sites
+ ◯ Storage: Deploy Cloud Storage security rules
+ ◯ Emulators: Set up local emulators for Firebase features
+</code></pre>
+<ul>
+<li>
+<p>続いて，以下の選択肢が表示される．</p>
+</li>
+<li>
+<p><code>Use an existing project</code>を選択して Enter．</p>
+</li>
+</ul>
+<pre><code class="language-bash">? Please select an option: (Use arrow keys)
+❯ Use an existing project
+  Create a new project
+  Add Firebase to an existing Google Cloud Platform project
+  Don't set up a default project
+</code></pre>
+<ul>
+<li>プロジェクトの選択肢が出るので，上で作成したプロジェクトを選択して Enter．</li>
+</ul>
+<pre><code class="language-bash">? Select a default Firebase project for this directory:
+  hoge-c83e4 (hoge)
+  hoge-791f2 (hogehoge)
+  fuga-813c6 (fuga)
+❯ functions-69daf (20200601-functions)
+  hoge-216007 (hogefuga)
+  piyo (piyo)
+  hogefuga (hoge-fuga)
+</code></pre>
+<ul>
+<li>選択肢が出るので，<code>JavaScript</code>を選択して Enter．</li>
+</ul>
+<pre><code class="language-bash">? What language would you like to use to write Cloud Functions? (Use arrow keys)
+
+❯ JavaScript
+  TypeScript
+</code></pre>
+<ul>
+<li>以降は下のような感じ．</li>
+</ul>
+<pre><code class="language-bash">? Do you want to use ESLint to catch probable bugs and enforce style? No
+✔  Wrote functions/package.json
+✔  Wrote functions/index.js
+✔  Wrote functions/.gitignore
+? Do you want to install dependencies with npm now? Yes
+...
+i  Writing configuration info to firebase.json...
+i  Writing project information to .firebaserc...
+i  Writing gitignore file to .gitignore...
+
+✔  Firebase initialization complete!
+</code></pre>
+<p>これで準備完了！</p>
+<div id="chapter_begin" style="break-before: page; page-break-before: always;"></div><h1 id="動作確認とデプロイ"><a class="header" href="#動作確認とデプロイ">動作確認とデプロイ</a></h1>
+<h2 id="ファイルの内容確認解説"><a class="header" href="#ファイルの内容確認解説">ファイルの内容確認&amp;解説</a></h2>
+<ul>
+<li>
+<p>必要なファイルが準備されているので，エディタでプロジェクトのフォルダを開く．</p>
+</li>
+<li>
+<p><code>functions/index.js</code>を開くと下記のような内容が記述されている．</p>
+</li>
+<li>
+<p>1 行目はモジュールの読み込み．</p>
+</li>
+<li>
+<p><code>helloWorld</code>は関数名．この関数にリクエストが来ると，<code>Hello from Firebase!</code>という文字列を返すよう記述されている．</p>
+</li>
+</ul>
+<pre><code class="language-js">// functions/index.js
+const functions = require(&quot;firebase-functions&quot;);
+
+// // Create and Deploy Your First Cloud Functions
+// // https://firebase.google.com/docs/functions/write-firebase-functions
+//
+// exports.helloWorld = functions.https.onRequest((request, response) =&gt; {
+//  response.send(&quot;Hello from Firebase!&quot;);
+// });
+</code></pre>
+<h2 id="編集ローカルサーバーでの動作確認"><a class="header" href="#編集ローカルサーバーでの動作確認">編集&amp;ローカルサーバーでの動作確認</a></h2>
+<ul>
+<li>下記のように編集する（コメントアウト外すだけ）．</li>
+</ul>
+<pre><code class="language-js">// functions/index.js
+const functions = require(&quot;firebase-functions&quot;);
+
+// // Create and Deploy Your First Cloud Functions
+// // https://firebase.google.com/docs/functions/write-firebase-functions
+//
+exports.helloWorld = functions.https.onRequest((request, response) =&gt; {
+  response.send(&quot;Hello from Firebase!&quot;);
+});
+</code></pre>
+<ul>
+<li>専用コマンドが用意されているのでローカルサーバーを立ち上げる．</li>
+</ul>
+<pre><code class="language-bash">$ firebase serve
+</code></pre>
+<ul>
+<li>実行結果</li>
+</ul>
+<pre><code class="language-bash">=== Serving from '/Users/taroosg/Desktop/20200601cloudfunctions'...
+
+⚠  Your requested &quot;node&quot; version &quot;8&quot; doesn't match your global version &quot;12&quot;
+i  functions: Watching &quot;/Users/taroosg/Desktop/20200601cloudfunctions/functions&quot; for Cloud Functions...
+✔  functions[helloWorld]: http function initialized (http://localhost:5000/cloudfunctions-3517c/us-central1/helloWorld).
+
+</code></pre>
+<ul>
+<li>
+<p>このとき，ローカルサーバの URL が発行されるためメモしておくことをオススメする（あとから確認もできるが煩雑なため）．</p>
+</li>
+<li>
+<p>ローカルサーバーが立ち上がったらターミナルからリクエストを送る．</p>
+</li>
+<li>
+<p>メッセージ（<code>Hello from Firebase!</code>）が返ってくれば OK！</p>
+</li>
+</ul>
+<pre><code class="language-bash">$ curl http://localhost:5000/cloudfunctions-3517c/us-central1/helloWorld
+Hello from Firebase!
+</code></pre>
+<ul>
+<li>確認したら<code>ctrl + c</code>でローカルサーバを停止する．</li>
+</ul>
+<h2 id="デプロイ--動作確認"><a class="header" href="#デプロイ--動作確認">デプロイ &amp; 動作確認</a></h2>
+<blockquote>
+<p><strong>【注意】</strong></p>
+<ul>
+<li>
+<p>現在（2022/03/01 時点）で，CloudFunctions のデプロイは支払い登録が必須となっています．</p>
+</li>
+<li>
+<p>Firebase のプロジェクトが無料プラン（Spark プラン）の場合はデプロイがエラーとなるため，前項のローカルサーバでの動作が確認できたら次の項目に進んでください．</p>
+</li>
+<li>
+<p>有料プラン（Blaze プラン）にアップグレードすることでデプロイできるようになるため，デプロイしたい方はプランを変更してください．</p>
+</li>
+</ul>
+</blockquote>
+<ul>
+<li>
+<p>動作確認したらデプロイする．</p>
+</li>
+<li>
+<p>ターミナルで下記を実行．</p>
+</li>
+</ul>
+<pre><code class="language-bash">$ firebase deploy
+</code></pre>
+<ul>
+<li>実行結果</li>
+</ul>
+<pre><code class="language-bash">=== Deploying to 'fir-todo-8868b'...
+
+i  deploying functions
+i  functions: ensuring necessary APIs are enabled...
+✔  functions: all necessary APIs are enabled
+i  functions: preparing functions directory for uploading...
+i  functions: packaged functions (26.53 KB) for uploading
+✔  functions: functions folder uploaded successfully
+i  functions: creating Node.js 8 function helloWorld(us-central1)...
+✔  functions[helloWorld(us-central1)]: Successful create operation.
+Function URL (helloWorld): https://hogehoge.cloudfunctions.net/helloWorld
+
+✔  Deploy complete!
+
+Project Console: https://console.firebase.google.com/project/fir-todo-8868b/overview
+</code></pre>
+<ul>
+<li>
+<p>このとき，デプロイ先の URL（<code>Function URL (helloWorld):...</code>）が発行されるためメモしておくことをオススメする（あとから確認もできるが煩雑なため）．</p>
+</li>
+<li>
+<p>デプロイが完了したらターミナルからリクエストを送る．</p>
+</li>
+<li>
+<p>メッセージが返ってくれば OK！</p>
+</li>
+</ul>
+<pre><code class="language-bash">$ curl https://hogehoge.cloudfunctions.net/helloWorld
+Hello from Firebase!
+</code></pre>
+<div id="chapter_begin" style="break-before: page; page-break-before: always;"></div><h1 id="express-の導入"><a class="header" href="#express-の導入">Express の導入</a></h1>
+<ul>
+<li>
+<p>Express は Node.js のフレームワーク．</p>
+</li>
+<li>
+<p>API のエンドポイントを手軽に実装できるので便利．</p>
+</li>
+<li>
+<p>下記コマンドを実行してインストールする．</p>
+</li>
+<li>
+<p>【重要】<code>functions</code>フォルダに移動しておく．</p>
+</li>
+</ul>
+<pre><code class="language-bash">$ cd functions
+$ npm install express
+</code></pre>
+<ul>
+<li>
+<p>インストールが終わったら index.js を編集する．</p>
+</li>
+<li>
+<p><code>app.get()</code>で API エンドポイントを定義．</p>
+</li>
+<li>
+<p><code>/hello</code>がエンドポイントの URL．リクエスト時に動作させたい関数のエンドポイントを指定する．</p>
+</li>
+</ul>
+<pre><code class="language-js">// index.js
+
+const functions = require(&quot;firebase-functions&quot;);
+// Expressの読み込み
+const express = require(&quot;express&quot;);
+
+const app = express();
+
+app.get(&quot;/hello&quot;, (req, res) =&gt; {
+  // レスポンスの設定
+  res.send(&quot;Hello Express!&quot;);
+});
+
+// 出力
+const api = functions.https.onRequest(app);
+module.exports = { api };
+</code></pre>
+<h2 id="動作確認"><a class="header" href="#動作確認">動作確認</a></h2>
+<ul>
+<li>保存したら動作確認．</li>
+</ul>
+<pre><code class="language-bash">$ firebase serve
+=== Serving from '/Users/taroosg/Desktop/20200601cloudfunctions'...
+
+⚠  Your requested &quot;node&quot; version &quot;8&quot; doesn't match your global version &quot;12&quot;
+i  functions: Watching &quot;/Users/taroosg/Desktop/20200601cloudfunctions/functions&quot; for Cloud Functions...
+✔  functions[api]: http function initialized (http://localhost:5000/cloudfunctions-3517c/us-central1/api).
+
+</code></pre>
+<ul>
+<li>ターミナルからリクエストを送る．</li>
+</ul>
+<pre><code class="language-bash">$ curl http://localhost:5000/cloudfunctions-3517c/us-central1/api/hello
+Hello Express!
+</code></pre>
+<blockquote>
+<p>無料プランの場合はデプロイは飛ばしてください．</p>
+</blockquote>
+<ul>
+<li>
+<p>確認したらデプロイ．</p>
+</li>
+<li>
+<p><code>helloworld</code>関数を削除していいかどうか訊かれたら yes で OK．</p>
+</li>
+</ul>
+<pre><code class="language-bash">$ firebase deploy
+? Would you like to proceed with deletion? Selecting no will continue the rest o
+f the deployments. Yes
+i  functions: deleting function helloWorld(us-central1)...
+✔  functions[helloWorld(us-central1)]: Successful delete operation.
+✔  functions[api(us-central1)]: Successful create operation.
+Function URL (api): https://hogehoge.cloudfunctions.net/api
+
+✔  Deploy complete!
+
+Project Console: https://console.firebase.google.com/project/fir-todo-8868b/overview
+</code></pre>
+<ul>
+<li>デプロイが完了しいたらリクエストしてみる．</li>
+</ul>
+<pre><code class="language-bash">$ curl https://hogehoge.cloudfunctions.net/api/hello
+Hello Express!
+</code></pre>
+<p>これで動作 OK！</p>
+<div id="chapter_begin" style="break-before: page; page-break-before: always;"></div><h1 id="express-での値の受け取り"><a class="header" href="#express-での値の受け取り">Express での値の受け取り</a></h1>
+<h2 id="url-のパラメータ取得"><a class="header" href="#url-のパラメータ取得">URL のパラメータ取得</a></h2>
+<ul>
+<li>
+<p><code>/user/:userId</code>のように記述すると，値を受け取ることができる．</p>
+</li>
+<li>
+<p>例えば，<code>https://hogehoge.cloudfunctions.net/api/user/2</code>のようにリクエストを送信すると，Express では<code>2</code>の文字列を取得することができる．</p>
+</li>
+<li>
+<p>Express 内では<code>req.params.userId</code>のように取得する．</p>
+</li>
+<li>
+<p><code>index.js</code>を以下のように編集する．</p>
+</li>
+</ul>
+<pre><code class="language-js">const functions = require(&quot;firebase-functions&quot;);
+const express = require(&quot;express&quot;);
+
+const app = express();
+
+app.get(&quot;/hello&quot;, (req, res) =&gt; {
+  res.send(&quot;Hello Express!&quot;);
+});
+
+// ↓↓↓ エンドポイントを追加 ↓↓↓
+app.get(&quot;/user/:userId&quot;, (req, res) =&gt; {
+  const users = [
+    { id: 1, name: &quot;ジョナサン&quot; },
+    { id: 2, name: &quot;ジョセフ&quot; },
+    { id: 3, name: &quot;承太郎&quot; },
+    { id: 4, name: &quot;仗助&quot; },
+    { id: 5, name: &quot;ジョルノ&quot; },
+  ];
+  // req.params.userIdでURLの後ろにつけた値をとれる．
+  const targetUser = users.find(
+    (user) =&gt; user.id === Number(req.params.userId)
+  );
+  res.send(targetUser);
+});
+
+// 以降変更なし
+const api = functions.https.onRequest(app);
+module.exports = { api };
+</code></pre>
+<h2 id="動作確認-1"><a class="header" href="#動作確認-1">動作確認</a></h2>
+<ul>
+<li>まずはローカルサーバーで動作確認</li>
+</ul>
+<pre><code class="language-bash">$ firebase serve
+</code></pre>
+<ul>
+<li>ユーザ ID を指定してリクエスト送信</li>
+</ul>
+<pre><code class="language-bash">curl http://localhost:5000/cloudfunctions-3517c/us-central1/api/user/3
+{&quot;id&quot;:3,&quot;name&quot;:&quot;承太郎&quot;}
+</code></pre>
+<blockquote>
+<p>無料プランの場合はデプロイは飛ばしてください．</p>
+</blockquote>
+<ul>
+<li>動作を確認したらデプロイ</li>
+</ul>
+<pre><code class="language-bash">$ firebase deploy
+</code></pre>
+<ul>
+<li>デプロイしたらリクエスト送信</li>
+</ul>
+<pre><code class="language-bash">$ curl https://hogehoge.cloudfunctions.net/api/user/2
+{&quot;id&quot;:2,&quot;name&quot;:&quot;ジョセフ&quot;}
+$ curl https://hogehoge.cloudfunctions.net/api/user/5
+{&quot;id&quot;:5,&quot;name&quot;:&quot;ジョルノ&quot;}
+</code></pre>
+<p>レスポンスが返ってくれば動作 OK．</p>
+<div id="chapter_begin" style="break-before: page; page-break-before: always;"></div><h1 id="http-リクエストの実装"><a class="header" href="#http-リクエストの実装">http リクエストの実装</a></h1>
+<ul>
+<li>
+<p>リクエスト受信時に値を取得できたので，取得した値を用いて Node.js から外部の API にリクエストを送る．</p>
+</li>
+<li>
+<p>例によって Google books API を利用する．</p>
+</li>
+<li>
+<p>Node.js から API へリクエストを送信することで，クライアントアプリケーションの処理を単純にすることができる．</p>
+</li>
+<li>
+<p>web アプリでもネイティブアプリでも，Node.js のエンドポイントにリクエストを送信するだけで良い．</p>
+</li>
+</ul>
+<h2 id="必要なモジュールのインストール"><a class="header" href="#必要なモジュールのインストール">必要なモジュールのインストール</a></h2>
+<ul>
+<li>
+<p>Node.js の標準機能でも http リクエストを行えるが，記述が煩雑になるので<code>request</code>モジュールを利用する．</p>
+</li>
+<li>
+<p>ついでに Promise を扱える<code>request-promise-native</code>もインストールする．</p>
+</li>
+<li>
+<p>下記コマンドでインストール．</p>
+</li>
+</ul>
+<pre><code class="language-bash">$ cd functions
+$ npm install request
+$ npm install request-promise-native
+</code></pre>
+<h2 id="リクエスト送信処理の追加"><a class="header" href="#リクエスト送信処理の追加">リクエスト送信処理の追加</a></h2>
+<ul>
+<li>
+<p>Google books API へのリクエスト関数を定義．</p>
+</li>
+<li>
+<p>エンドポイントを追加し，関数を実行．</p>
+</li>
+<li>
+<p>API からのレスポンスをクライアントへ送信する．</p>
+</li>
+<li>
+<p><code>index.js</code>を下記のように編集．</p>
+</li>
+</ul>
+<pre><code class="language-js">// index.js
+const functions = require(&quot;firebase-functions&quot;);
+const express = require(&quot;express&quot;);
+const requestPromise = require(&quot;request-promise-native&quot;); // 追加
+
+const app = express();
+
+// APIにリクエストを送る関数を定義
+const getDataFromApi = async (keyword) =&gt; {
+  // cloud functionsから実行する場合には地域の設定が必要になるため，`country=JP`を追加している
+  const requestUrl =
+    &quot;https://www.googleapis.com/books/v1/volumes?country=JP&amp;q=intitle:&quot;;
+  const result = await requestPromise(`${requestUrl}${keyword}`);
+  return result;
+};
+
+app.get(&quot;/hello&quot;, (req, res) =&gt; {
+  res.send(&quot;Hello Express!&quot;);
+});
+
+app.get(&quot;/user/:userId&quot;, (req, res) =&gt; {
+  // 省略
+});
+
+// エンドポイント追加
+app.get(&quot;/gbooks/:keyword&quot;, async (req, res) =&gt; {
+  // APIリクエストの関数を実行
+  const response = await getDataFromApi(req.params.keyword);
+  res.send(response);
+});
+
+const api = functions.https.onRequest(app);
+module.exports = { api };
+</code></pre>
+<h2 id="動作確認デプロイ"><a class="header" href="#動作確認デプロイ">動作確認&amp;デプロイ</a></h2>
+<ul>
+<li>ローカルサーバーで確認．</li>
+</ul>
+<pre><code class="language-bash">$ firebase serve
+</code></pre>
+<ul>
+<li>リクエスト送信（例として<code>keyword</code>に<code>node.js</code>を指定）</li>
+</ul>
+<pre><code class="language-bash">$ curl http://localhost:5000/cloudfunctions-3517c/us-central1/api/gbooks/node.js
+↓のようなJSONデータがたくさん返ってくればOK
+{
+  &quot;kind&quot;: &quot;books#volume&quot;,
+  &quot;id&quot;: &quot;fOgtAgAAQBAJ&quot;,
+  &quot;etag&quot;: &quot;McoTnjan+uE&quot;,
+  &quot;selfLink&quot;: &quot;https://www.googleapis.com/books/v1/volumes/fOgtAgAAQBAJ&quot;,
+  &quot;volumeInfo&quot;: {
+    &quot;title&quot;: &quot;Mastering Node.js&quot;,
+    &quot;authors&quot;: [
+      &quot;Sandro Pasquali&quot;
+    ],
+    &quot;publisher&quot;: &quot;Packt Publishing Ltd&quot;,
+    &quot;publishedDate&quot;: &quot;2013-11-25&quot;,
+    &quot;description&quot;: &quot;This book contains an extensive set of practical examples and an easy-to-follow approach to creating 3D objects.This book is great for anyone who already knows JavaScript and who wants to start creating 3D graphics that run in any browser. You don’t need to know anything about advanced math or WebGL; all that is needed is a general knowledge of JavaScript and HTML. The required materials and examples can be freely downloaded and all tools used in this book are open source.&quot;,
+    &quot;industryIdentifiers&quot;: [
+      {
+        &quot;type&quot;: &quot;ISBN_13&quot;,
+        &quot;identifier&quot;: &quot;9781782166337&quot;
+      },
+      {
+        &quot;type&quot;: &quot;ISBN_10&quot;,
+        &quot;identifier&quot;: &quot;1782166335&quot;
+      }
+    ],
+    &quot;readingModes&quot;: {
+      &quot;text&quot;: true,
+      &quot;image&quot;: true
+    },
+    &quot;pageCount&quot;: 346,
+    &quot;printType&quot;: &quot;BOOK&quot;,
+    &quot;categories&quot;: [
+      &quot;Computers&quot;
+    ],
+    &quot;maturityRating&quot;: &quot;NOT_MATURE&quot;,
+    &quot;allowAnonLogging&quot;: true,
+    &quot;contentVersion&quot;: &quot;2.2.2.0.preview.3&quot;,
+    &quot;panelizationSummary&quot;: {
+      &quot;containsEpubBubbles&quot;: false,
+      &quot;containsImageBubbles&quot;: false
+    },
+    &quot;imageLinks&quot;: {
+      &quot;smallThumbnail&quot;: &quot;http://books.google.com/books/content?id=fOgtAgAAQBAJ&amp;printsec=frontcover&amp;img=1&amp;zoom=5&amp;edge=curl&amp;source=gbs_api&quot;,
+      &quot;thumbnail&quot;: &quot;http://books.google.com/books/content?id=fOgtAgAAQBAJ&amp;printsec=frontcover&amp;img=1&amp;zoom=1&amp;edge=curl&amp;source=gbs_api&quot;
+    },
+    &quot;language&quot;: &quot;en&quot;,
+    &quot;previewLink&quot;: &quot;http://books.google.co.jp/books?id=fOgtAgAAQBAJ&amp;printsec=frontcover&amp;dq=intitle:node.js&amp;hl=&amp;cd=10&amp;source=gbs_api&quot;,
+    &quot;infoLink&quot;: &quot;https://play.google.com/store/books/details?id=fOgtAgAAQBAJ&amp;source=gbs_api&quot;,
+    &quot;canonicalVolumeLink&quot;: &quot;https://play.google.com/store/books/details?id=fOgtAgAAQBAJ&quot;
+  },
+  &quot;saleInfo&quot;: {
+    &quot;country&quot;: &quot;JP&quot;,
+    &quot;saleability&quot;: &quot;FOR_SALE&quot;,
+    &quot;isEbook&quot;: true,
+    &quot;listPrice&quot;: {
+      &quot;amount&quot;: 3299,
+      &quot;currencyCode&quot;: &quot;JPY&quot;
+    },
+    &quot;retailPrice&quot;: {
+      &quot;amount&quot;: 2969,
+      &quot;currencyCode&quot;: &quot;JPY&quot;
+    },
+    &quot;buyLink&quot;: &quot;https://play.google.com/store/books/details?id=fOgtAgAAQBAJ&amp;rdid=book-fOgtAgAAQBAJ&amp;rdot=1&amp;source=gbs_api&quot;,
+    &quot;offers&quot;: [
+      {
+        &quot;finskyOfferType&quot;: 1,
+        &quot;listPrice&quot;: {
+          &quot;amountInMicros&quot;: 3299000000,
+          &quot;currencyCode&quot;: &quot;JPY&quot;
+        },
+        &quot;retailPrice&quot;: {
+          &quot;amountInMicros&quot;: 2969000000,
+          &quot;currencyCode&quot;: &quot;JPY&quot;
+        }
+      }
+    ]
+  },
+  &quot;accessInfo&quot;: {
+    &quot;country&quot;: &quot;JP&quot;,
+    &quot;viewability&quot;: &quot;PARTIAL&quot;,
+    &quot;embeddable&quot;: true,
+    &quot;publicDomain&quot;: false,
+    &quot;textToSpeechPermission&quot;: &quot;ALLOWED&quot;,
+    &quot;epub&quot;: {
+      &quot;isAvailable&quot;: true
+    },
+    &quot;pdf&quot;: {
+      &quot;isAvailable&quot;: true
+    },
+    &quot;webReaderLink&quot;: &quot;http://play.google.com/books/reader?id=fOgtAgAAQBAJ&amp;hl=&amp;printsec=frontcover&amp;source=gbs_api&quot;,
+    &quot;accessViewStatus&quot;: &quot;SAMPLE&quot;,
+    &quot;quoteSharingAllowed&quot;: false
+  },
+  &quot;searchInfo&quot;: {
+    &quot;textSnippet&quot;: &quot;This book contains an extensive set of practical examples and an easy-to-follow approach to creating 3D objects.This book is great for anyone who already knows JavaScript and who wants to start creating 3D graphics that run in any browser.&quot;
+  }
+}
+</code></pre>
+<blockquote>
+<p>無料プランの場合はデプロイは飛ばしてください．</p>
+</blockquote>
+<ul>
+<li>動作確認したらデプロイ</li>
+</ul>
+<pre><code class="language-bash">$ firebase deploy
+</code></pre>
+<ul>
+<li>
+<p>ターミナルからリクエストを送る．</p>
+</li>
+<li>
+<p>ローカルサーバのときと同様にいろいろ返ってくれば OK！</p>
+</li>
+</ul>
+<pre><code class="language-bash">$ curl https://hogehoge.cloudfunctions.net/api/gbooks/react
+うまくいっていればJSONデータが返ってくる
+</code></pre>
+<div id="chapter_begin" style="break-before: page; page-break-before: always;"></div><h1 id="cors-対策"><a class="header" href="#cors-対策">CORS 対策</a></h1>
+<ul>
+<li>
+<p>ターミナルから<code>curl</code>コマンドでリクエストを送信すると正常に動作するが，クライアントアプリから<code>axios</code>などでリクエストを送信すると CORS エラーが発生する．</p>
+</li>
+<li>
+<p>アプリケーションからも利用できるように，追加のモジュールをインストールする．</p>
+</li>
+</ul>
+<pre><code class="language-bash">$ cd functions
+$ npm install cors
+</code></pre>
+<h2 id="ファイル内全ての-api-について-cors-を許可したい場合"><a class="header" href="#ファイル内全ての-api-について-cors-を許可したい場合">ファイル内全ての API について CORS を許可したい場合</a></h2>
+<ul>
+<li>全部外部からのリクエストを許可する場合には下記のように追記すれば OK．</li>
+</ul>
+<pre><code class="language-js">// index.js
+const functions = require(&quot;firebase-functions&quot;);
+const express = require(&quot;express&quot;);
+const requestPromise = require(&quot;request-promise-native&quot;);
+const cors = require(&quot;cors&quot;); // 追加
+
+const app = express();
+
+app.use(cors()); // 追加
+
+const getDataFromApi = async (keyword) =&gt; {
+  // 省略
+};
+
+app.get(&quot;/hello&quot;, (req, res) =&gt; {
+  // 省略
+});
+
+app.get(&quot;/user/:userId&quot;, (req, res) =&gt; {
+  // 省略
+});
+
+app.get(&quot;/gbooks/:keyword&quot;, async (req, res) =&gt; {
+  // 省略
+});
+
+const api = functions.https.onRequest(app);
+module.exports = { api };
+</code></pre>
+<h2 id="個別の-api-について-cors-を許可したい場合"><a class="header" href="#個別の-api-について-cors-を許可したい場合">個別の API について CORS を許可したい場合</a></h2>
+<ul>
+<li>
+<p>全部許可せずに，指定したエンドポイントのみアクセスを許可したい場合．</p>
+</li>
+<li>
+<p>許可したいエンドポイントだけに追記を行う．</p>
+</li>
+</ul>
+<pre><code class="language-js">// index.js
+const functions = require(&quot;firebase-functions&quot;);
+const express = require(&quot;express&quot;);
+const requestPromise = require(&quot;request-promise-native&quot;);
+const cors = require(&quot;cors&quot;); // 追加
+
+const app = express();
+
+// app.use(cors());  // 一旦コメントアウト
+
+const getDataFromApi = async (keyword) =&gt; {
+  // 省略
+};
+
+app.get(&quot;/hello&quot;, (req, res) =&gt; {
+  // 省略
+});
+
+app.get(&quot;/user/:userId&quot;, (req, res) =&gt; {
+  // 省略
+});
+
+// ここに`cors()`を追加
+app.get(&quot;/gbooks/:keyword&quot;, cors(), async (req, res) =&gt; {
+  // 省略
+});
+
+const api = functions.https.onRequest(app);
+module.exports = { api };
+</code></pre>
+<ul>
+<li>クライアントアプリケーションからリクエストを送信してデータが返ってくれば OK．</li>
+</ul>
+<div id="chapter_begin" style="break-before: page; page-break-before: always;"></div><h1 id="課題"><a class="header" href="#課題">課題</a></h1>
+<ul>
+<li>
+<p>cloud functions 上に任意の API を絡めた Node.js のアプリケーションをデプロイ．</p>
+<ul>
+<li>Firebase が無料プランの場合はローカルでの動作確認ができれば OK！</li>
+</ul>
+</li>
+<li>
+<p>ターミナルや postman からリクエストを送信して動作している状態になっていれば OK！</p>
+</li>
+<li>
+<p>できる人はクライアントアプリを実装して連携させてみよう！</p>
+</li>
+</ul>
+<p>今回はここまで( `･ω･)b</p>
+<div id="chapter_begin" style="break-before: page; page-break-before: always;"></div><h1 id="サーバ編-①nodejs-1"><a class="header" href="#サーバ編-①nodejs-1">サーバ編 ①（Node.js）</a></h1>
 <h2 id="今回のゴール"><a class="header" href="#今回のゴール">今回のゴール</a></h2>
 <ul>
 <li>Node.js と Express で簡単な API を体験する．</li>
@@ -433,7 +1259,7 @@ app.listen(port, () =&gt; {
 </code></pre>
 <p>上記のコードは<code>app.js</code>が実行されると，<code>http://localhost:3001</code>でサーバが立ち上がることを示している．</p>
 <p>また，<code>http://localhost:3001/</code>に<code>GET</code>でリクエストが来ると，<code>Hello Node.js!</code>というレスポンスを返すよう記述している．</p>
-<h2 id="動作確認"><a class="header" href="#動作確認">動作確認</a></h2>
+<h2 id="動作確認-2"><a class="header" href="#動作確認-2">動作確認</a></h2>
 <p>上記を記述したら，ターミナルで以下のコマンドを実行し，サーバを起動する．実行する際には作業ディレクトリに移動しておくこと．</p>
 <pre><code class="language-bash">$ node app.js
 </code></pre>
@@ -486,7 +1312,7 @@ app.listen(port, () =&gt; {
 });
 
 </code></pre>
-<h2 id="動作確認-1"><a class="header" href="#動作確認-1">動作確認</a></h2>
+<h2 id="動作確認-3"><a class="header" href="#動作確認-3">動作確認</a></h2>
 <p>記述したら，再度下記コマンドでサーバを立ち上げる．</p>
 <pre><code class="language-bash">$ node app.js
 </code></pre>
@@ -683,7 +1509,7 @@ controllers/omikuji.controller.js
 ervices/omikuji.service.js
 
 </code></pre>
-<h2 id="動作確認-2"><a class="header" href="#動作確認-2">動作確認</a></h2>
+<h2 id="動作確認-4"><a class="header" href="#動作確認-4">動作確認</a></h2>
 <p>サーバを立ち上げ，以下のコマンドでリクエストを送信する．</p>
 <pre><code class="language-bash">$ curl localhost:3001/omikuji
 </code></pre>
@@ -805,7 +1631,7 @@ export const getJanken = async (query) =&gt; {
 };
 
 </code></pre>
-<h2 id="動作確認-3"><a class="header" href="#動作確認-3">動作確認</a></h2>
+<h2 id="動作確認-5"><a class="header" href="#動作確認-5">動作確認</a></h2>
 <p>サーバを立ち上げて，<code>curl</code>コマンドでリクエストを送信する．POST する場合は下記の書式で実行する．</p>
 <p>結果が返ってくれば成功．</p>
 <pre><code class="language-bash">$ curl -X POST -H &quot;Content-Type: application/json&quot; -d '{&quot;myhand&quot;:&quot;パー&quot;}' localhost:3001/janken
@@ -865,13 +1691,6 @@ export const getJanken = async (query) =&gt; {
 <p>おみくじやじゃんけんの実装を通じて，必要な処理に含まれる責務を分離し，別々のファイルに実装した．</p>
 <p>Node.js はシンプルな構成で柔軟な API を構築できる魅力的な技術である．興味を持った方は，じゃんけんの勝率変更や DB 連携などにも挑戦してみると良いだろう．</p>
 <p>今回は以上である( `･ω･)b</p>
-<div id="chapter_begin" style="break-before: page; page-break-before: always;"></div><h1 id="課題"><a class="header" href="#課題">課題</a></h1>
-<p>下記の実装に挑戦しよう．</p>
-<p>成果物は GitHub の URL を Slack の指定したチャンネルに投稿すること．</p>
-<ul>
-<li>Node.js を用いたオリジナルの API を実装する．</li>
-</ul>
-<p>今回はここまで( `･ω･)b</p>
 
                     </main>
 
