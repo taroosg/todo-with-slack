@@ -14,7 +14,7 @@
 
 ## 役割分担
 
-前回講義の役割分担表も参照．今回は repository に DB 関連の処理を実装する．
+補足資料の役割分担表も参照．今回は repository に DB 関連の処理を実装する．
 
 repository に DB 関連の処理を任せることで，DB が変更された場合でも他のコードの影響せずに運用することができる．このような役割分担をリポジトリパターンと呼ぶ．
 
@@ -25,17 +25,20 @@ repository に DB 関連の処理を任せることで，DB が変更された�
 | services     | リクエストに対する処理のメインロジックを記述．                      |
 | repositories | DB 関連の処理を記述．今回は Supabase とやり取りする処理を記述する． |
 
-## 既存ファイルへの追記と新規ファイルの準備
+## 実装
 
-`app.js`にルーティングを追記する．
+まず下記コマンドで express をインストールする．
+
+```bash
+$ npm i express
+```
+
+続いて，`app.js` に以下の内容を記述する．
 
 ```js
 // app.js
 
 import express from "express";
-import { omikujiRouter } from "./routes/omikuji.route.js";
-import { jankenRouter } from "./routes/janken.route.js";
-// 🔽 追加
 import { todoRouter } from "./routes/todo.route.js";
 
 const app = express();
@@ -43,32 +46,12 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 const port = 3000;
 
-app.get("/", (req, res) => {
-  res.json({
-    uri: "/",
-    message: "Hello Node.js!",
-  });
-});
-
-app.use("/omikuji", (req, res) => omikujiRouter(req, res));
-app.use("/janken", (req, res) => jankenRouter(req, res));
-
-// 🔽 追加
 app.use("/todo", (req, res) => todoRouter(req, res));
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);
 });
 ```
-
-## 必要なファイルの作成
-
-新しく以下のファイルを作成する．前回の役割に加えて，今回は DB 関連の処理が必要となるため `repositories` フォルダを作成してファイルを追加する．
-
-- `routes/todo.route.js`
-- `controllers/todo.controller.js`
-- `services/todo.service.js`
-- `repositories/todo.repository.js`
 
 まずそれぞれのファイルが連携できることを確認するため，DB と接続せずに固定のデータを返す処理を実装する．
 

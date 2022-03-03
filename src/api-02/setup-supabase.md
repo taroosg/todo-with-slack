@@ -37,6 +37,43 @@ Supabase のコンソール（[https://app.supabase.io/](https://app.supabase.io
 | `created_at` | `timestampz` | 初期設定のまま      |
 | `updated_at` | `timestampz` | `created-at` と同様 |
 
+## Node.js 側の準備
+
+まず適当な場所で以下のコマンドを実行する．`express-202203` はプロジェクトのディレクトリ名なので各自で設定して OK．
+
+```bash
+$ mkdir express-202203
+$ cd express-202203
+$ npm init -y
+```
+
+`express-202203` ディレクトリをエディタで開き，今回の実装で必要なディレクトリとファイル（以下）を作成しておく．
+
+- `app.js`
+
+- `routes/todo.route.js`
+
+- `controllers/todo.controller.js`
+
+- `services/todo.service.js`
+
+- `repositories/todo.repository.js`
+
+下記のような構成となっていれば OK！
+
+```bash
+.
+├── app.js
+├── controllers
+│   └── todo.controller.js
+├── package.json
+├── routes
+│   └── todo.route.js
+└── services
+    └── todo.service.js
+
+```
+
 ## Node.js と Supabase の連携
 
 1. Supabase の管理画面から「`⚙`」→「`API`」の順にクリックする．
@@ -61,8 +98,6 @@ $ npm i dotenv
 
 ```
 /node_modules
-
-# 🔽 ここを追記
 .env
 ```
 
