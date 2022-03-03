@@ -2,7 +2,18 @@
 
 - [はじめに](./readme.md)
 
-- [サーバ編 ①（Node.js）](./api-01/readme.md)
+- [サーバ編 ①（Node.js）](./api-00/readme.md)
+
+  - [Cloud Functions と Express](./api-00/get-started.md)
+  - [環境構築](./api-00/setup.md)
+  - [動作確認とデプロイ](./api-00/serve-deploy.md)
+  - [Express の導入](./api-00/install-express.md)
+  - [Express での値の受け取り](./api-00/get-params.md)
+  - [http リクエストの実装](./api-00/request.md)
+  - [CORS 対策](./api-00/cors.md)
+  - [課題](./api-00/work.md)
+
+- [サーバ編補足（Node.js）](./api-01/readme.md)
 
   - [Node.js とは](./api-01/about-nodejs.md)
   - [API 実装の準備](./api-01/prepare-api.md)
@@ -12,7 +23,7 @@
   - [API 実装 2（おみくじ中級編）](./api-01/omikuji-api02.md)
   - [API 実装 3（じゃんけん）](./api-01/janken-api.md)
   - [まとめ](./api-01/summary.md)
-  - [課題](./api-01/work.md)
+  <!-- - [課題](./api-01/work.md) -->
 
 <!-- - [サーバ編 ②（Node.js）](./api-02/readme.md)
 
