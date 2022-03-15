@@ -13,6 +13,7 @@ DB がオンライン上にあるので，環境問わず使えるところが�
 Supabase のコンソール（[https://app.supabase.io/](https://app.supabase.io/)）にアクセスし，GitHub アカウントでサインインする．
 
 「New project」をクリックし，project を作成する．
+
 ![Supabaseプロジェクト作成](./img/supabase-01.png)
 
 プロジェクト名と DB アクセス用パスワードを設定する．面倒なパスワードを作成しないといけないので注意．
@@ -73,6 +74,37 @@ $ npm init -y
     └── todo.service.js
 
 ```
+
+## `package.json` の編集
+
+下記の内容を追記する．
+
+```json
+"type": "module",
+```
+
+追記後は以下のような状態．
+
+```json
+{
+  "name": "express-202203",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
+```
+
+> **💡 Key Point**
+>
+> `package.json`に`"type": "module"`を追記することで`import`形式で別ファイルを読みこむことができる．
+> この追記を行わない場合，外部ファイルを読み込む際には`require()`関数を用いる．
+> React などでは`import`が基本となっており，こちらに揃えておいたほうがメリットが大きくオススメである．
 
 ## Node.js と Supabase の連携
 

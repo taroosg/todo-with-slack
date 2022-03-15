@@ -70,7 +70,6 @@ Is this OK? (yes)
   "author": "",
   "license": "ISC"
 }
-
 ```
 
 | 項目        | 意味合い                                                                   |
@@ -82,7 +81,6 @@ Is this OK? (yes)
 | script      | 開発者が任意に作成するコマンド．                                           |
 | auther      | 開発者情報．1 人のみ記述する．                                             |
 | license     | ライセンス情報．                                                           |
-
 
 ## `package.json`に追記
 
@@ -107,11 +105,10 @@ Is this OK? (yes)
   "author": "",
   "license": "ISC"
 }
-
 ```
 
->**💡 Key Point**
+> **💡 Key Point**
 >
->`package.json`に`"type": "module"`を追記することで`import`形式で別ファイルを読みこむことができる．
->この追記を行わない場合，外部ファイルを読み込む際には`require()`関数を用いる．
->前回のReactなどでは`import`が基本となっており，こちらに揃えておいたほうがメリットが大きくオススメである．
+> `package.json`に`"type": "module"`を追記することで`import`形式で別ファイルを読みこむことができる．
+> この追記を行わない場合，外部ファイルを読み込む際には`require()`関数を用いる．
+> React などでは`import`が基本となっており，こちらに揃えておいたほうがメリットが大きくオススメである．
