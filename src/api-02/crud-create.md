@@ -138,7 +138,7 @@ export const store = async ({ params }) => {
 
 ## 動作確認
 
-処理を追加したら動作確認する．サーバを起動して下記コマンドでデータを送信し，成功のレスポンスが返ってくれば OK．
+処理を追加したら動作確認する．**サーバを再起動して**，別ターミナルで下記コマンドでデータを送信し，成功のレスポンスが返ってくれば OK．
 
 ```bash
 $ curl -X POST -H "Content-Type: application/json" -d '{"todo":"node.js","user_id":1,"deadline":"2021-12-31"}' localhost:3000/todo

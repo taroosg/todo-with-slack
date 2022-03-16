@@ -34,6 +34,7 @@ URL に付加した id を`req.params.id`で取得する．サービスに id �
 ```js
 // controllers/todo.controller.js
 
+// 🔽 編集
 import {
   getAllTodoData,
   getTodayTodoData,
@@ -70,6 +71,7 @@ export const createTodoData = async (req, res, next) => {
 ```js
 // services/todo.service.js
 
+// 🔽 編集
 import { findAll, findToday, store } from "../repositories/todo.repository.js";
 
 export const getAllTodoData = async () => {

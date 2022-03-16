@@ -25,7 +25,7 @@
   - [まとめ](./api-01/summary.md)
   <!-- - [課題](./api-01/work.md) -->
 
-<!-- - [サーバ編 ②（Node.js）](./api-02/readme.md)
+- [サーバ編 ②（Node.js）](./api-02/readme.md)
 
   - [データの永続化について](./api-02/about-perpetuation.md)
   - [Supabase の準備](./api-02/setup-supabase.md)
@@ -37,7 +37,7 @@
   - [Delete の処理](./api-02/crud-delete.md)
   - [Slack 連携設定](./api-02/connect-to-slack.md)
   - [Slack 連携実装](./api-02/post-to-slack.md)
-  - [まとめ](./api-02/summary.md) -->
+  - [まとめ](./api-02/summary.md)
 
 <!-- - [フロント編 ①（React）](./app-01/readme.md)
 
