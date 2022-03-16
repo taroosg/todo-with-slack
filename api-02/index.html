@@ -178,6 +178,65 @@
 <p>Slack と連携する処理を実装する．</p>
 </li>
 </ul>
+<h2 id="サーバ---クライアント型のアプリケーション"><a class="header" href="#サーバ---クライアント型のアプリケーション">サーバ - クライアント型のアプリケーション</a></h2>
+<h3 id="サーバで動作する言語サーバサイド"><a class="header" href="#サーバで動作する言語サーバサイド">サーバで動作する言語（サーバサイド）</a></h3>
+<p>サーバ上でプログラムが実行される．</p>
+<p><img src="./img/php_web_server.svg" alt="サーバサイド言語の動き方" /></p>
+<ul>
+<li>
+<p>PHP</p>
+</li>
+<li>
+<p>Ruby</p>
+</li>
+<li>
+<p>Python</p>
+</li>
+<li>
+<p>JAVA</p>
+</li>
+<li>
+<p>Node.js</p>
+</li>
+<li>
+<p>etc...</p>
+</li>
+</ul>
+<h2 id="サーバサイドの役割"><a class="header" href="#サーバサイドの役割">サーバサイドの役割</a></h2>
+<p>様々な Web アプリケーションが存在するが，基本のサーバサイド処理は同様である．</p>
+<p>基本の機能は何らかのデータを扱うことである．</p>
+<h3 id="例"><a class="header" href="#例">例</a></h3>
+<ul>
+<li>
+<p>twitter =&gt; ツイート，検索，タイムラインの表示，etc</p>
+</li>
+<li>
+<p>facebook =&gt; 投稿，検索，記事の更新，コメント，etc</p>
+</li>
+<li>
+<p>wordpress =&gt; ブログ記事の投稿，編集，削除，etc</p>
+</li>
+</ul>
+<p>※：アプリケーションは必ずしも PHP で作られているわけではない！！</p>
+<h3 id="-key-point"><a class="header" href="#-key-point">💡 Key Point</a></h3>
+<blockquote>
+<p>上記の処理は以下の 4 つに集約される．</p>
+<ul>
+<li>
+<p>📝 データの「作成」（Create）</p>
+</li>
+<li>
+<p>📖 データの「参照」（Read）</p>
+</li>
+<li>
+<p>🔄 データの「更新」（Update）</p>
+</li>
+<li>
+<p>🗑 データの「削除」（Delete）</p>
+</li>
+</ul>
+</blockquote>
+<p>これら 4 種類の処理の頭文字をとって「CRUD」と呼ぶ．</p>
 
                     </main>
 
