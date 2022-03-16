@@ -7,6 +7,7 @@
 まずは，以下 2 つのエンドポイントを作成して手動で実行する処理をつくる．
 
 - todo リスト全件のデータを取得して Slack に投稿する．
+
 - 実行日以前のデータのみ取得して Slack に投稿する．
 
 ### STEP 2
@@ -60,8 +61,8 @@ Slack アプリ側で Bot を追加したい channel で「右上のメンバー
 `.env` ファイルに `Bot User Access Token` を記述しておく．
 
 ```txt
-SUPABASE_URL=https://hogehoge.supabase.co
 SUPABASE_API_KEY=hogefugapiyofoobar.eyJyb2xlIjoiYW5vbiIsImlhdCI6MTYzODc3MDU0NCwiZXhwIjoxOTU0MzQ2NTQ0fQ.FM4MwMd8wbPDGbXtnGfsn6bGSgMzBLdHOMGWRwhoK2I
+SUPABASE_URL=https://hogehoge.supabase.co
 
 SLACK_API_TOKEN=`取得した Bot User OAuth Token`
 ```

@@ -18,11 +18,15 @@ Supabase のコンソール（[https://app.supabase.io/](https://app.supabase.io
 
 プロジェクト名と DB アクセス用パスワードを設定する．面倒なパスワードを作成しないといけないので注意．
 
+> パスワードの条件はよくわからないが，以下の文字列でクリアできる．
+>
+> `QwertyZxcvbn102938-_`
+
 ![Supabaseプロジェクト詳細](./img/supabase-02.png)
 
 ### テーブルの作成
 
-「Create a new table」をクリックし，テーブルを作成する．
+「左側の Table アイコン」→「Create a new table」の順にクリックし，テーブルを作成する．
 
 テーブル名：`todo_table`
 
@@ -77,10 +81,16 @@ $ npm init -y
 
 ## `package.json` の編集
 
-下記の内容を追記する．
+下記 2 点の内容を追記する．
 
 ```json
 "type": "module",
+```
+
+↓ こちらは `"scripts"` 内に記述する．
+
+```json
+"start": "node app.js",
 ```
 
 追記後は以下のような状態．
@@ -93,6 +103,7 @@ $ npm init -y
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "node app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
@@ -116,8 +127,8 @@ $ npm init -y
 3. プロジェクト直下に `.env` ファイルを作成し，以下の内容を記述する．これらの情報は機密情報なので環境変数を用いて管理する．
 
 ```txt
-SUPABASE_URL=`2で確認したURL`
 SUPABASE_API_KEY=`2で確認したAPI key`
+SUPABASE_URL=`2で確認したURL`
 ```
 
 4. 以下のコマンドを実行し，環境変数を使用するためのライブラリをインストールする．
@@ -126,7 +137,7 @@ SUPABASE_API_KEY=`2で確認したAPI key`
 $ npm i dotenv
 ```
 
-5. `.gitignore` に以下の内容を追記し，`.env` ファイルを Git 管理外にする．
+5. プロジェクト直下に `.gitignore` を作成し，に以下の内容を追記して `.env` ファイルを Git 管理外にする．
 
 ```
 /node_modules

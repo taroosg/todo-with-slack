@@ -125,7 +125,15 @@ export const findAll = () => {
 
 ## 動作確認
 
-動作確認する．以下のコマンドでレスポンスが返ってくれば OK．
+動作確認する．サーバを立ち上げる．
+
+```bash
+$ npm start
+```
+
+別ターミナルで以下のコマンドを実行し，下記のレスポンスが返ってくれば OK．
+
+ブラウザで `localhost:3000/todo` にアクセスして確認しても OK．
 
 ```bash
 $ curl localhost:3000/todo
