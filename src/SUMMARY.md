@@ -39,7 +39,7 @@
   - [Slack 連携実装](./api-02/post-to-slack.md)
   - [まとめ](./api-02/summary.md)
 
-- [フロント編 ①（React）](./app-01/readme.md)
+<!-- - [フロント編 ①（React）](./app-01/readme.md)
 
   - [React とは](./app-01/about-react.md)
   - [アプリケーション実装の準備](./app-01/construct-app.md)
@@ -50,7 +50,7 @@
   - [http リクエストの実装](./app-01/http-request.md)
   - [表示の調整](./app-01/ui.md)
   - [まとめ](./app-01/summary.md)
-  - [課題](./app-01/work.md)
+  - [課題](./app-01/work.md) -->
 
 <!-- - [フロント編 ②（React）](./app-02/readme.md)
   - [サーバ側の準備](./app-02/setup-server.md)

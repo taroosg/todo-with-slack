@@ -74,6 +74,8 @@ $ npm init -y
 ├── package.json
 ├── routes
 │   └── todo.route.js
+├── repositories
+│   └── todo.repository.js
 └── services
     └── todo.service.js
 
