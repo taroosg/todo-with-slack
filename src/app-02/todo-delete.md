@@ -29,7 +29,7 @@ export const Todo = ({
 }) => {
   const updateTodoData = async (params) => {
     const newData = { ...params, ...{ is_done: is_done ? false : true } };
-    const requestUrl = "http://localhost:3001/todo";
+    const requestUrl = "http://localhost:8000/todo";
     const updatedData = await axios.put(`${requestUrl}/${params.id}`, newData);
     const result = await getData();
     return updatedData;

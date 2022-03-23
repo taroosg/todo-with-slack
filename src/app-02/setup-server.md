@@ -44,6 +44,8 @@ $ npm i cors
 
 [https://github.com/expressjs/cors](https://github.com/expressjs/cors)
 
+また，ローカルで動作させる際に競合しないよう，ポートを変更しておく．
+
 ```js
 import express from "express";
 // 🔽 追加
@@ -56,6 +58,9 @@ const app = express();
 app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+
+// 🔽 ポートを8000にする
+const port = 8000;
 
 // 省略
 ```

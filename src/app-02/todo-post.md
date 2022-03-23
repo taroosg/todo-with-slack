@@ -67,7 +67,7 @@ POST で送信する場合は `axios.post()` を用いる．第 1 引数にリ�
 ```js
 const postFormData = async (postData) => {
   setFormData(JSON.stringify(postData));
-  const result = await axios.post("http://localhost:3001/todo", postData);
+  const result = await axios.post("http://localhost:8000/todo", postData);
   console.log(result);
   return result;
 };
@@ -105,7 +105,7 @@ const postFormData = async (postData) => {
       "content-type": "application/json; charset=utf-8"
   },
   "config": {
-    "url": "http://localhost:3001/todo",
+    "url": "http://localhost:8000/todo",
       "method": "post",
         "data": "{\"todo\":\"test\",\"user_id\":\"4\"}",
           "headers": {

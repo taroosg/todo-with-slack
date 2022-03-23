@@ -89,7 +89,7 @@ export const TodoIndex = () => {
 
   // 🔽 追加
   const getAllTodo = async () => {
-    const result = await axios.get("http://localhost:3001/todo");
+    const result = await axios.get("http://localhost:8000/todo");
     setTodoList(result.data.result);
     return result;
   };
