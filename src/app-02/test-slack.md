@@ -60,13 +60,13 @@ import axios from "axios";
 
 export const TestSlack = () => {
   const postAllTodo = async () => {
-    const result = await axios.get("http://localhost:3001/slack");
+    const result = await axios.get("http://localhost:8000/slack");
     console.log(result);
     return result;
   };
 
   const postTodayTodo = async () => {
-    const result = await axios.get("http://localhost:3001/slack/today");
+    const result = await axios.get("http://localhost:8000/slack/today");
     console.log(result);
     return result;
   };

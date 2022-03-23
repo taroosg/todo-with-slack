@@ -17,7 +17,7 @@ export const TodoToday = () => {
   const [todoList, setTodoList] = useState(null);
 
   const getTodayTodo = async () => {
-    const result = await axios.get("http://localhost:3001/todo/today");
+    const result = await axios.get("http://localhost:8000/todo/today");
     setTodoList(result.data.result);
     return result;
   };

@@ -52,16 +52,16 @@
   - [まとめ](./app-01/summary.md)
   - [課題](./app-01/work.md)
 
-<!-- - [フロント編 ②（React）](./app-02/readme.md)
+- [フロント編 ②（React）](./app-02/readme.md)
   - [サーバ側の準備](./app-02/setup-server.md)
   - [必要な画面の準備](./app-02/create-pages.md)
   - [todo 送信画面の作成](./app-02/todo-post.md)
   - [todo 一覧画面（全件）の作成](./app-02/todo-index.md)
   - [コンポーネントの最適化](./app-02/setup-component.md)
-  - [todo 更新処理の作成](./app-02/todo-update.md)
-  - [todo 削除処理の作成](./app-02/todo-delete.md)
+  - [【参考】todo 更新処理の作成](./app-02/todo-update.md)
+  - [【参考】todo 削除処理の作成](./app-02/todo-delete.md)
   - [todo 一覧画面（本日）の作成](./app-02/todo-today.md)
-  - [データ取得タイミングの最適化](./app-02/swr-setup.md)
-  - [データ取得タイミングの調整](./app-02/swr-polling.md)
   - [Slack 連携機能のテスト画面実装](./app-02/test-slack.md)
-  - [まとめ](./app-02/summary.md) -->
+  - [まとめ](./app-02/summary.md)
+  <!-- - [データ取得タイミングの最適化](./app-02/swr-setup.md)
+  - [データ取得タイミングの調整](./app-02/swr-polling.md) -->
